@@ -1,0 +1,216 @@
+0001/01/01 00:00:00.000 -1 -1 Info  --------- beginning of system
+2026/09/15 19:31:28.830 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:-1
+2026/09/15 19:31:28.858 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:31:28.911 918 918 Debug OplusInputMethodUtil init sDebug to false, init sDebugIme to false, init sAlwaysOn to false
+2026/09/15 19:31:28.912 918 918 Debug OplusInputMethodUtil updateDebugToClass InputMethodManager.DEBUG = false
+2026/09/15 19:31:28.912 918 918 Debug OplusInputMethodUtil updateDebugToClass ImeFocusController.DEBUG = false
+2026/09/15 19:31:28.912 918 918 Debug OplusInputMethodUtil updateDebugToClass InsetsController.DEBUG = false
+2026/09/15 19:31:28.912 918 918 Debug OplusInputMethodUtil updateDebugToClass BaseInputConnection.DEBUG = false
+2026/09/15 19:31:29.001 918 918 Debug ActivityThread ComponentInfo{com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity} checkFinished=false 2
+2026/09/15 19:31:29.001 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:31:29.029 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:31:29.047 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:true, surfaceControlChanged:true, transformHintChanged:false, mSurfaceSize:Point(1080, 2412), mLastSurfaceSize:Point(0, 0), mWidth:-1, mHeight:-1, requestedWidth:1080, requestedHeight:2412, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2132213504, tmpFrames:ClientWindowFrames{frame=[0,0][1080,2412] display=[0,0][1080,2412] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:31:29.047 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(1080, 2412), lastSurfaceSize:Point(0, 0), format:-3, blastBufferQueue:null
+2026/09/15 19:31:29.099 918 918 Warn VRI[UnityPlayerGameActivity] handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026/09/15 19:31:29.106 918 918 Warn VRI[UnityPlayerGameActivity] handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026/09/15 19:31:29.172 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:false, surfaceControlChanged:false, transformHintChanged:false, mSurfaceSize:Point(1080, 2412), mLastSurfaceSize:Point(1080, 2412), mWidth:1080, mHeight:2412, requestedWidth:1080, requestedHeight:2412, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2132213376, tmpFrames:ClientWindowFrames{frame=[0,0][1080,2412] display=[0,0][1080,2412] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:31:29.173 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(1080, 2412), lastSurfaceSize:Point(1080, 2412), format:-3, blastBufferQueue:android.graphics.BLASTBufferQueue@2cb7708
+2026/09/15 19:31:31.487 918 918 Debug OplusInputMethodManagerInternal get inputMethodManager extension: com.android.internal.view.IInputMethodManager$Stub$Proxy@1c7248b
+2026/09/15 19:31:32.151 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:false, surfaceControlChanged:false, transformHintChanged:false, mSurfaceSize:Point(1080, 2412), mLastSurfaceSize:Point(1080, 2412), mWidth:1080, mHeight:2412, requestedWidth:1080, requestedHeight:2412, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2132213504, tmpFrames:ClientWindowFrames{frame=[0,0][1080,2412] display=[0,0][1080,2412] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:31:32.151 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(1080, 2412), lastSurfaceSize:Point(1080, 2412), format:-3, blastBufferQueue:android.graphics.BLASTBufferQueue@2cb7708
+0001/01/01 00:00:00.000 -1 -1 Info  --------- beginning of main
+2026/09/15 19:31:33.016 918 970 Debug Unity Changing screen orientation to LandscapeRight.
+2026/09/15 19:31:33.123 918 918 Debug callGcSupression java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[])' on a null object reference
+2026/09/15 19:31:33.124 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:31:33.148 918 918 Info Unity onConfigurationChanged
+2026/09/15 19:31:33.151 918 918 Warn VRI[UnityPlayerGameActivity] handleResized, msg:, frameChanged:true, configChanged:true, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026/09/15 19:31:33.159 918 918 Verbose GameActivity onImeInsetsChanged from Text Listener
+2026/09/15 19:31:33.159 918 918 Debug ViewRootImplExtImpl wrapConfigInfoIntoFlags rotation=3, smallestScreenWidthDp=360, relayoutAsync=false, flags=0, newFlags=23593728, residentWS=false, title=com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity
+2026/09/15 19:31:33.165 918 970 Info Unity Handle cmd APP_CMD_CONFIG_CHANGED(9)
+2026/09/15 19:31:33.165 918 970 Info Unity Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+2026/09/15 19:31:33.168 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:true, surfaceControlChanged:false, transformHintChanged:true, mSurfaceSize:Point(2412, 1080), mLastSurfaceSize:Point(1080, 2412), mWidth:1080, mHeight:2412, requestedWidth:2412, requestedHeight:1080, transformHint:7, installOrientation:0, displayRotation:3, isSurfaceValid:true, attr.flag:-2132213504, tmpFrames:ClientWindowFrames{frame=[0,0][2412,1080] display=[0,0][2412,1080] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:31:33.168 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(2412, 1080), lastSurfaceSize:Point(1080, 2412), format:-3, blastBufferQueue:android.graphics.BLASTBufferQueue@2cb7708
+2026/09/15 19:31:33.175 918 918 Debug SurfaceView 8359782 handleSyncNoBuffer
+2026/09/15 19:31:33.177 918 918 Debug SurfaceView 8359782 finishedDrawing
+2026/09/15 19:31:33.177 918 918 Debug SurfaceView 8359782 performDrawFinished mAttachedToWindow true
+2026/09/15 19:31:33.183 918 918 Debug SurfaceView 8359782 dispatchDraw mDrawFinished true isAboveParent false (mPrivateFlags & PFLAG_SKIP_DRAW) 128
+2026/09/15 19:31:33.183 918 918 Debug SurfaceView 8359782 clearSurfaceViewPort mCornerRadius 0.0
+2026/09/15 19:31:33.188 918 918 Debug VRI[UnityPlayerGameActivity] draw finished. seqId=0
+2026/09/15 19:31:33.193 918 970 Info Unity Handle cmd APP_CMD_WINDOW_RESIZED(3)
+2026/09/15 19:31:33.193 918 970 Debug Unity NativeWindow resized 2412x1080
+2026/09/15 19:31:33.193 918 970 Info Unity Handle cmd APP_CMD_WINDOW_REDRAW_NEEDED(4)
+2026/09/15 19:31:33.193 918 970 Info Unity Handle cmd APP_CMD_CONTENT_RECT_CHANGED(5)
+2026/09/15 19:31:33.207 918 970 Debug Unity InitializeOrResetSwapChain 2412x1080 hdr=0 samples=1
+2026/09/15 19:31:33.223 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:31:33.223 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:31:33.223 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:31:33.223 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:31:33.223 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:31:33.223 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:31:33.223 918 1231 Info SwappyDisplayManager Terminating looper thread
+2026/09/15 19:31:33.224 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:31:33.224 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:31:33.224 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:31:33.224 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:31:33.225 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:31:33.225 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:31:33.225 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:31:33.225 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:31:33.225 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:31:33.225 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:31:33.225 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:31:33.225 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:31:33.226 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:31:33.226 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:31:33.244 918 970 Error SwappyDisplayManager dalvik.system.InMemoryDexClassLoader[DexPathList[[dex file "InMemoryDexFile[cookie=[-5476376616000739328, -5476376612066387552]]"],nativeLibraryDirectories=[/system/lib64, /system_ext/lib64]]] couldn't find "libgame.so"
+2026/09/15 19:31:33.248 918 1244 Info SwappyDisplayManager Starting looper thread
+2026/09/15 19:31:33.264 918 1060 Debug BLASTBufferQueue [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1](f:0,a:3) producer disconnected before acquireNextBufferLocked
+2026/09/15 19:31:33.762 918 918 Debug AudioManagerExtImpl getStreamVolume packageName=com.airidasbalkus.mino, index=70, streamType=3
+2026/09/15 19:31:34.650 918 918 Verbose AutofillManager requestHideFillUi(null): anchor = null
+2026/09/15 19:31:34.749 918 918 Debug ViewRootImplExtImpl the up motion event handled by client, just return
+2026/09/15 19:31:49.613 918 918 Verbose AutofillManager requestHideFillUi(null): anchor = null
+2026/09/15 19:31:49.699 918 918 Debug ViewRootImplExtImpl the up motion event handled by client, just return
+2026/09/15 19:31:49.831 918 918 Verbose AutofillManager requestHideFillUi(null): anchor = null
+2026/09/15 19:31:49.923 918 918 Debug ViewRootImplExtImpl the up motion event handled by client, just return
+2026/09/15 19:31:50.428 918 918 Verbose AutofillManager requestHideFillUi(null): anchor = null
+2026/09/15 19:31:50.562 918 918 Debug ViewRootImplExtImpl the up motion event handled by client, just return
+2026/09/15 19:31:50.857 918 918 Verbose AutofillManager requestHideFillUi(null): anchor = null
+2026/09/15 19:31:50.964 918 918 Debug ViewRootImplExtImpl the up motion event handled by client, just return
+2026/09/15 19:32:07.314 918 970 Debug Unity Changing screen orientation to Portrait.
+2026/09/15 19:32:07.478 918 918 Debug callGcSupression java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[])' on a null object reference
+2026/09/15 19:32:07.479 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:32:07.483 918 918 Info Unity onConfigurationChanged
+2026/09/15 19:32:07.485 918 918 Warn VRI[UnityPlayerGameActivity] handleResized, msg:, frameChanged:true, configChanged:true, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026/09/15 19:32:07.493 918 918 Verbose GameActivity onImeInsetsChanged from Text Listener
+2026/09/15 19:32:07.494 918 918 Debug ViewRootImplExtImpl wrapConfigInfoIntoFlags rotation=0, smallestScreenWidthDp=360, relayoutAsync=false, flags=0, newFlags=23592960, residentWS=false, title=com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity
+2026/09/15 19:32:07.522 918 970 Info Unity Handle cmd APP_CMD_CONFIG_CHANGED(9)
+2026/09/15 19:32:07.522 918 970 Info Unity Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+2026/09/15 19:32:07.523 918 970 Debug Unity InitializeOrResetSwapChain 2412x1080 hdr=0 samples=1
+2026/09/15 19:32:07.533 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:true, surfaceControlChanged:false, transformHintChanged:true, mSurfaceSize:Point(1080, 2412), mLastSurfaceSize:Point(2412, 1080), mWidth:2412, mHeight:1080, requestedWidth:1080, requestedHeight:2412, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2132213504, tmpFrames:ClientWindowFrames{frame=[0,0][1080,2412] display=[0,0][1080,2412] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:32:07.533 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(1080, 2412), lastSurfaceSize:Point(2412, 1080), format:-3, blastBufferQueue:android.graphics.BLASTBufferQueue@2cb7708
+2026/09/15 19:32:07.534 918 918 Debug SurfaceView 8359782 handleSyncNoBuffer
+2026/09/15 19:32:07.535 918 918 Debug SurfaceView 8359782 finishedDrawing
+2026/09/15 19:32:07.535 918 918 Debug SurfaceView 8359782 performDrawFinished mAttachedToWindow true
+2026/09/15 19:32:07.538 918 918 Debug SurfaceView 8359782 dispatchDraw mDrawFinished true isAboveParent false (mPrivateFlags & PFLAG_SKIP_DRAW) 128
+2026/09/15 19:32:07.538 918 918 Debug SurfaceView 8359782 clearSurfaceViewPort mCornerRadius 0.0
+2026/09/15 19:32:07.542 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:07.543 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:07.543 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:07.543 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:07.543 918 1244 Info SwappyDisplayManager Terminating looper thread
+2026/09/15 19:32:07.543 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:07.543 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.543 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:07.543 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:07.543 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:07.543 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.543 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:07.543 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:07.544 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:07.544 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.544 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:07.544 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:07.544 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:07.544 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.546 918 918 Debug VRI[UnityPlayerGameActivity] draw finished. seqId=0
+2026/09/15 19:32:07.572 918 970 Error SwappyDisplayManager dalvik.system.InMemoryDexClassLoader[DexPathList[[dex file "InMemoryDexFile[cookie=[-5476376616000696704, -5476376612066379040]]"],nativeLibraryDirectories=[/system/lib64, /system_ext/lib64]]] couldn't find "libgame.so"
+2026/09/15 19:32:07.575 918 2567 Info SwappyDisplayManager Starting looper thread
+2026/09/15 19:32:07.580 918 970 Info Unity Handle cmd APP_CMD_WINDOW_RESIZED(3)
+2026/09/15 19:32:07.580 918 970 Debug Unity NativeWindow resized 1080x2412
+2026/09/15 19:32:07.581 918 970 Info Unity Handle cmd APP_CMD_WINDOW_REDRAW_NEEDED(4)
+2026/09/15 19:32:07.581 918 970 Info Unity Handle cmd APP_CMD_CONTENT_RECT_CHANGED(5)
+2026/09/15 19:32:07.581 918 1060 Debug BLASTBufferQueue [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1](f:0,a:3) producer disconnected before acquireNextBufferLocked
+2026/09/15 19:32:07.582 918 970 Debug Unity InitializeOrResetSwapChain 1080x2412 hdr=0 samples=1
+2026/09/15 19:32:07.598 918 2567 Info SwappyDisplayManager Terminating looper thread
+2026/09/15 19:32:07.599 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:07.599 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:07.599 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:07.599 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:07.599 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:07.599 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.599 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:07.599 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:07.599 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:07.599 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.599 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:07.599 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:07.600 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:07.600 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.600 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:07.600 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:07.600 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:07.600 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:07.619 918 970 Error SwappyDisplayManager dalvik.system.InMemoryDexClassLoader[DexPathList[[dex file "InMemoryDexFile[cookie=[-5476376610658177536, -5476376612066378816]]"],nativeLibraryDirectories=[/system/lib64, /system_ext/lib64]]] couldn't find "libgame.so"
+2026/09/15 19:32:07.620 918 2591 Info SwappyDisplayManager Starting looper thread
+2026/09/15 19:32:07.634 918 1060 Debug BLASTBufferQueue [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1](f:0,a:3) producer disconnected before acquireNextBufferLocked
+2026/09/15 19:32:09.498 918 970 Debug Unity Changing screen orientation to LandscapeRight.
+2026/09/15 19:32:09.617 918 918 Debug callGcSupression java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Object java.lang.reflect.Method.invoke(java.lang.Object, java.lang.Object[])' on a null object reference
+2026/09/15 19:32:09.618 918 918 Debug ResourcesManagerExtImpl applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+2026/09/15 19:32:09.620 918 918 Info Unity onConfigurationChanged
+2026/09/15 19:32:09.621 918 918 Warn VRI[UnityPlayerGameActivity] handleResized, msg:, frameChanged:true, configChanged:true, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+2026/09/15 19:32:09.623 918 918 Verbose GameActivity onImeInsetsChanged from Text Listener
+2026/09/15 19:32:09.623 918 918 Debug ViewRootImplExtImpl wrapConfigInfoIntoFlags rotation=3, smallestScreenWidthDp=360, relayoutAsync=false, flags=0, newFlags=23593728, residentWS=false, title=com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity
+2026/09/15 19:32:09.646 918 970 Info Unity Handle cmd APP_CMD_CONFIG_CHANGED(9)
+2026/09/15 19:32:09.646 918 970 Info Unity Handle cmd APP_CMD_WINDOW_INSETS_CHANGED(17)
+2026/09/15 19:32:09.646 918 970 Debug Unity InitializeOrResetSwapChain 1080x2412 hdr=0 samples=1
+2026/09/15 19:32:09.653 918 918 Debug VRI[UnityPlayerGameActivity] relayoutWindow result, sizeChanged:true, surfaceControlChanged:false, transformHintChanged:true, mSurfaceSize:Point(2412, 1080), mLastSurfaceSize:Point(1080, 2412), mWidth:1080, mHeight:2412, requestedWidth:2412, requestedHeight:1080, transformHint:7, installOrientation:0, displayRotation:3, isSurfaceValid:true, attr.flag:-2132213504, tmpFrames:ClientWindowFrames{frame=[0,0][2412,1080] display=[0,0][2412,1080] parentFrame=[0,0][0,0]}, relayoutAsync:false, mSyncSeqId:0
+2026/09/15 19:32:09.653 918 918 Warn VRI[UnityPlayerGameActivity] updateBlastSurfaceIfNeeded, surfaceSize:Point(2412, 1080), lastSurfaceSize:Point(1080, 2412), format:-3, blastBufferQueue:android.graphics.BLASTBufferQueue@2cb7708
+2026/09/15 19:32:09.654 918 918 Debug SurfaceView 8359782 handleSyncNoBuffer
+2026/09/15 19:32:09.655 918 918 Debug SurfaceView 8359782 finishedDrawing
+2026/09/15 19:32:09.655 918 918 Debug SurfaceView 8359782 performDrawFinished mAttachedToWindow true
+2026/09/15 19:32:09.658 918 2591 Info SwappyDisplayManager Terminating looper thread
+2026/09/15 19:32:09.658 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:09.658 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:09.658 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:09.658 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:09.659 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:09.659 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:09.659 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:09.659 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.659 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:09.659 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:09.659 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:09.659 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.659 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:09.659 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:09.659 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:09.660 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.660 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:09.660 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:09.660 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:09.660 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.660 918 918 Debug SurfaceView 8359782 dispatchDraw mDrawFinished true isAboveParent false (mPrivateFlags & PFLAG_SKIP_DRAW) 128
+2026/09/15 19:32:09.661 918 918 Debug SurfaceView 8359782 clearSurfaceViewPort mCornerRadius 0.0
+2026/09/15 19:32:09.666 918 918 Debug VRI[UnityPlayerGameActivity] draw finished. seqId=0
+2026/09/15 19:32:09.695 918 970 Error SwappyDisplayManager dalvik.system.InMemoryDexClassLoader[DexPathList[[dex file "InMemoryDexFile[cookie=[-5476376616000704384, -5476376612066399200]]"],nativeLibraryDirectories=[/system/lib64, /system_ext/lib64]]] couldn't find "libgame.so"
+2026/09/15 19:32:09.699 918 2620 Info SwappyDisplayManager Starting looper thread
+2026/09/15 19:32:09.706 918 970 Info Unity Handle cmd APP_CMD_WINDOW_RESIZED(3)
+2026/09/15 19:32:09.706 918 970 Debug Unity NativeWindow resized 2412x1080
+2026/09/15 19:32:09.706 918 970 Info Unity Handle cmd APP_CMD_WINDOW_REDRAW_NEEDED(4)
+2026/09/15 19:32:09.706 918 970 Info Unity Handle cmd APP_CMD_CONTENT_RECT_CHANGED(5)
+2026/09/15 19:32:09.714 918 1060 Debug BLASTBufferQueue [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1](f:0,a:3) producer disconnected before acquireNextBufferLocked
+2026/09/15 19:32:09.717 918 970 Debug Unity InitializeOrResetSwapChain 2412x1080 hdr=0 samples=1
+2026/09/15 19:32:09.737 918 2620 Info SwappyDisplayManager Terminating looper thread
+2026/09/15 19:32:09.737 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:09.737 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:09.737 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) disconnect: api 1
+2026/09/15 19:32:09.737 918 970 Debug BufferQueueProducer [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1(BLAST Consumer)1](id:39600000001,api:1,p:918,c:918) connect: api=1 producerControlledByApp=true
+2026/09/15 19:32:09.737 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:09.737 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:09.737 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:09.737 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.737 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:09.737 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:09.738 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:09.738 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.738 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x38
+2026/09/15 19:32:09.738 918 970 Error Gralloc4 isSupported(1, 1, 56, 1, ...) failed with 5
+2026/09/15 19:32:09.738 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 56 usage b00: 5
+2026/09/15 19:32:09.738 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.738 918 970 Error qdgralloc GetSize: Unrecognized pixel format: 0x3b
+2026/09/15 19:32:09.738 918 970 Error Gralloc4 isSupported(1, 1, 59, 1, ...) failed with 5
+2026/09/15 19:32:09.738 918 970 Error GraphicBufferAllocator Failed to allocate (4 x 4) layerCount 1 format 59 usage b00: 5
+2026/09/15 19:32:09.738 918 970 Error AHardwareBuffer GraphicBuffer(w=4, h=4, lc=1) failed (Unknown error -5), handle=0x0
+2026/09/15 19:32:09.757 918 970 Error SwappyDisplayManager dalvik.system.InMemoryDexClassLoader[DexPathList[[dex file "InMemoryDexFile[cookie=[-5476376616000694784, -5476376612066398976]]"],nativeLibraryDirectories=[/system/lib64, /system_ext/lib64]]] couldn't find "libgame.so"
+2026/09/15 19:32:09.758 918 2650 Info SwappyDisplayManager Starting looper thread
+2026/09/15 19:32:09.781 918 1060 Debug BLASTBufferQueue [SurfaceView[com.airidasbalkus.mino/com.unity3d.player.UnityPlayerGameActivity]#1](f:0,a:3) producer disconnected before acquireNextBufferLocked
