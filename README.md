@@ -1,3 +1,15 @@
+Device Model OPPO Find X5 Pro
+
+Android Version: Android OS 15
+
+Graphics API: VULKAN
+
+
+
+\[Boot] OPPO CPH2305 | Android OS 15 / API-35 (AP3A.240617.008/S.205cac3-124d3-124d5) | Vulkan | 2412x1080 @ 480 dpi
+
+
+
 key name: mygame-release   Location: C:\\Users\\jeffe\\Documents\\keystore, alias name: mygame-release, validity period: 50 years
 
 Android Dev
