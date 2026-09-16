@@ -40,14 +40,14 @@ A lane-based endless runner where swiping shifts you between three lanes to dodg
 - **Device:** OPPO Find X5 Pro (CPH2305), Adreno 730 / Snapdragon 8 Gen 1, Android 15
 - **Target frame time:** 16.7 ms at 60 fps; High FPS toggle: no (60 fps is the fixed target via Application.targetFrameRate)
 - **Memory ceiling:** under 600 MB
-- **Cold start:** under 10 s to interactive (menu/first playable frame) I do want to include a splash screen on game launch.
+- **Cold start:** under 5s to interactive (menu/first playable frame).
 - **APK size:** under 800 MB
 
 ## Monetisation (if any) & ethics notes
 - No monetisation planned for this module's scope. If published later, a one-time purchase or optional cosmetic-only IAP would be the model considered.
 - Explicitly will not use: loot boxes, pressure timers, non-stop ads.
 
-## Risks & cuts list (in the order they get cut)
+## Risks & cuts list (in the order they get cut, 4 would get cut first)
 1. Scoring/combo multiplier system
 2. Second pickup type (shield/invincibility)
 3. Audio/music and particle polish
@@ -57,4 +57,7 @@ A lane-based endless runner where swiping shifts you between three lanes to dodg
 - **Locked on:** Wed 16 Sep 2026
 - **Changes after lock** require a note in the development journal explaining what changed and why.
 
-Reference: Hunicke, LeBlanc and Zubek (2004), *MDA: A Formal Approach to Game Design and Game Research*.
+Reference: 
+- Hunicke, LeBlanc and Zubek (2004), *MDA: A Formal Approach to Game Design and Game Research*.
+- Fink, D. (2025). Optimizing Cold, Warm, and Hot Starts: A Developer’s Guide to Faster App Launches. [online] Bugsee. Available at: https://bugsee.com/blog/cold-start-vs-warm-start/ [Accessed 16 Sept. 2026].
+
