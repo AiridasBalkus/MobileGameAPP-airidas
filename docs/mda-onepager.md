@@ -1,11 +1,11 @@
 # MDA One-Pager - Mino
 
-**Module:** Mobile Game Development (A12581) · **Student:** Airidas Balkus · **Project option:** 2 · **Due:** Wed 16 Sep 2026 (Week 2 Lab B)
+**Module:** Mobile Game Development (A12581) · **Student:** Airidas Balkus · **Project option:** 2 (Endless Runner) · **Due:** Wed 16 Sep 2026 (Week 2 Lab B)
 
 Keep this to **one page**. It is your scope contract for the semester and is submitted again with CA1.
 
 ## One-line pitch
-A lane-based endless runner where swiping shifts you between three lanes to dodge obstacles and collect pickups, rewarding quick reflexes and clean timing. underwater theme if have time
+A lane-based endless runner where swiping shifts you between three lanes to dodge obstacles and collect pickups, rewarding quick reflexes and clean timing. Underwater theme (preferable) if have time.
 
 ## Aesthetics (what the player feels)
 - Flow and mastery: the run speeds up gradually, so basically success feels like the player's reactions genuinely improving
@@ -41,7 +41,7 @@ A lane-based endless runner where swiping shifts you between three lanes to dodg
 - **Target frame time:** 16.7 ms at 60 fps; High FPS toggle: no (60 fps is the fixed target via Application.targetFrameRate)
 - **Memory ceiling:** under 600 MB
 - **Cold start:** under 10 s to interactive (menu/first playable frame) I do want to include a splash screen on game launch.
-- **APK size:** under 100 MB
+- **APK size:** under 800 MB
 
 ## Monetisation (if any) & ethics notes
 - No monetisation planned for this module's scope. If published later, a one-time purchase or optional cosmetic-only IAP would be the model considered.
