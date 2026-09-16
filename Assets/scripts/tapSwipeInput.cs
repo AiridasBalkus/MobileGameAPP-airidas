@@ -16,6 +16,7 @@ public class tapSwipeInput : MonoBehaviour
 
     void Update()
     {
+        if(LifecycleGuard.IsPaused) return; // Don't process input if the game is paused
         foreach (var touch in Touch.activeTouches)
         {
             if (touch.phase != TouchPhase.Ended) continue;
