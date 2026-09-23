@@ -4,6 +4,7 @@ public class LifecycleGuard : MonoBehaviour
     public static bool IsPaused { get; private set; }
     public static event System.Action<bool> PausedChanged;
 
+    void Start() => SetPaused(true);
     // Home, app switch, incoming call, screen off: save HERE.
     void OnApplicationPause(bool paused)
     {
@@ -21,5 +22,6 @@ public class LifecycleGuard : MonoBehaviour
         Time.timeScale = value ? 0f : 1f;
         AudioListener.pause = value;
         PausedChanged?.Invoke(value);
+        Debug.Log($"[Pause] {value}, timeScale {Time.timeScale}");
     }
 }

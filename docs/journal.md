@@ -52,3 +52,26 @@ Week 3 Lab A, Part D (RenderScaleProbe, stress test on)
 - 25 events per frame; all gameplay geometry in 1 SRP Batch (RenderLoop.DrawSRPBatcher)
 - Busiest pass: BloomDownsample (10 draws) + BloomUpsample (5) = 17/25 events are bloom
 - No GPU timings on this route; GPU not the limit per Part D, bloom noted for later
+
+Week 3 Lab B, Part B (release 0.1.2, frame pacing on, targetFrameRate 60)
+- Menu (pause panel): avg 16.64 ms / p99 16.65 ms
+- Steady gameplay: avg 16.64 ms / p99 16.65 ms
+- Worst case (spawn interval 0.05 s): avg 16.64 ms / p99 16.65 ms, unchanged after ~77 s
+- No missed frames in any state; [HIT] Debug.Log spams during worst case
+- Phone refresh rate = 120 Hz
+
+Week 3 Lab B, Part C (Dev build, normal play, spawn interval 1.5)
+- Steady-state GC Allocated in Frame: 51 B (3 x 17 B)
+- Allocating marker: NativeInputSystem.NotifyBeforeUpdate() (Input System package, not project code)
+- Hit frames: extra allocation from Debug.Log in PlayerCollision ([HIT] message)  <- confirm
+- GC.Collect: one in ~42 s capture (frame 1784, 2.82 ms, 16% of that frame)
+- Target 0 B: remove [HIT] Debug.Log; Input System allocation to investigate in Week 5
+
+Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
+- Peak Total Reserved: 363.0 MB (194.3 MB in use); textures 44.9 MB (104)
+- Worst case rendering: SetPass 25 / batches n/a (SRP Batcher; counter reads 0,
+  Frame Debugger shows 1 SRP Batch for gameplay, 25 events) / triangles 6.1k
+- Peak Total Reserved 363.0 MB (Dev, stress, 60 s) / TOTAL PSS 176.6 MB (release, normal play, 2 min)
+  PSS < Reserved: reserved address space isn't all resident; Dev build adds ~37 MB profiler
+- Cold start median 260 ms; APK 52.9 MB
+- Throttling: none observed

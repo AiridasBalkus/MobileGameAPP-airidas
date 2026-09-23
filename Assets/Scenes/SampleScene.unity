@@ -1715,7 +1715,7 @@ MonoBehaviour:
   spawnInterval: 5
   laneWidth: 2
   laneHalfCount: 1
-  stressTest: 1
+  stressTest: 0
   stressTestSpawnInterval: 0.05
 --- !u!1 &773190229
 GameObject:
@@ -2219,6 +2219,7 @@ GameObject:
   - component: {fileID: 975944011}
   - component: {fileID: 975944012}
   - component: {fileID: 975944013}
+  - component: {fileID: 975944014}
   m_Layer: 0
   m_Name: MobileBootStrap
   m_TagString: Untagged
@@ -2280,6 +2281,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c35eb85ebf3d00749b4f450ec156398c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LifecycleGuard
+--- !u!114 &975944014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975944009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 088d56dcc0bfdbf42923a67292a08b5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FrameTimeSampler
 --- !u!1 &1028466319
 GameObject:
   m_ObjectHideFlags: 0
