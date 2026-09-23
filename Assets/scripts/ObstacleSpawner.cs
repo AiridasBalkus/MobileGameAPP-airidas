@@ -10,11 +10,16 @@ public class ObstacleSpawner : MonoBehaviour
     public int laneHalfCount = 1; //matches LaneRunner's lane count/2
     float _timer;
 
+    [Header("Debugging - stress test")]
+    public bool stressTest = false; //if true, will spawn obstacles every frame for testing purposes
+    public float stressTestSpawnInterval = 0.05f; //time interval between spawns during stress test
+
     void Update()
     {
         if (player == null || obstaclePrefab == null) return;
         _timer += Time.deltaTime;
-        if (_timer < spawnInterval) return;
+        float interval = (stressTest && Debug.isDebugBuild) ? stressTestSpawnInterval : spawnInterval;
+        if (_timer < interval) return;
         _timer = 0f;
 
         int lane = Random.Range(-laneHalfCount, laneHalfCount + 1); //random lane selection
