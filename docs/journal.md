@@ -34,3 +34,21 @@ Week 3 - Lab A, Part C (frame 3433)
   meshes 128.7 KB, audio 1.1 MB, graphics/driver 70.1 MB, managed heap 3.7/4.8 MB
 - Object Count rises all run: ~3.4k (frame 1910) -> ~5.6k (frame 3433)
 - Rendering stays flat (off-screen cubes culled); the leak costs CPU, not GPU
+
+Week 3 Lab A, Part D (RenderScaleProbe, stress test on)
+- Probe toggle visible in capture: texture memory 44.9 MB -> 34.5 MB (render targets halved)
+- Full scale: frame 16.57 ms, WaitForLastPresentation 11.10 ms (~5.5 ms real work),
+  Gfx.WaitForPresentOnGfxThread 0.00 ms
+- Half scale: frame 16.46 ms, WaitForLastPresentation 9.97 ms (~6.5 ms real work),
+  Gfx.WaitForPresentOnGfxThread 0.81 ms
+- Verdict: CPU-bound. Frame time barely moved (<1%) at half resolution, and the
+  CPU never waits on the GPU. Real work rose during the run because obstacles
+  keep accumulating (object count ~3.2k -> ~5.6k), not because of render scale.
+- Candidate fix: stop the obstacle leak. Despawn relative to the player and pool
+  obstacles instead of Instantiate/Destroy (Physics + ScriptRunBehaviourUpdate
+  are the growing markers)
+
+  Part E (Frame Debugger, AGI not used)
+- 25 events per frame; all gameplay geometry in 1 SRP Batch (RenderLoop.DrawSRPBatcher)
+- Busiest pass: BloomDownsample (10 draws) + BloomUpsample (5) = 17/25 events are bloom
+- No GPU timings on this route; GPU not the limit per Part D, bloom noted for later
