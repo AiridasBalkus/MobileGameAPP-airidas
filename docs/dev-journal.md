@@ -5,7 +5,6 @@ to move between 3 lanes while auto-running forward). First thing I'd cut
 if time ran out: any scoring/combo multiplier system — the bare lane-change
 loop with obstacles is the minimum viable version.
 
-
 Week 2 - 
 - CPU: 33.84ms
 - SetPass calls: 1
@@ -75,3 +74,11 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
   PSS < Reserved: reserved address space isn't all resident; Dev build adds ~37 MB profiler
 - Cold start median 260 ms; APK 52.9 MB
 - Throttling: none observed
+
+5 Oct 2026: Week 5 Lab A (skeleton, Awaitable, pooling)
+- Scene flow: Boot (App: Bootstrap + FrameTimeSampler, DontDestroyOnLoad) > Menu > Game > Result > Retry. GameManager states Playing / Paused / Won / Lost; Won unused by design (endless runner). Feedback on the core loop: live distance score label (SetText, no per-change string allocation).
+- Coroutine hunt: 0 in project code; 15 TMP sample scripts only. Converted ObstacleSpawner's Update() timer to an Awaitable loop with a token linked to Application.exitCancellationToken.
+- Pooling: ObstaclePool (Stack, 24 prewarmed); obstacles recycle 10 units behind the player. Fixes bottleneck-01 (Week 3 leak).
+- Bug: obstacles vanished in front of the player. The new field reused the old name despawnDistanceZ, so the prefab kept its saved -10 and the check became "10 units ahead". Lesson: serialized prefab values override code defaults; renamed the field to despawnBehind.
+- Device: OPPO broken, profiled on Samsung XCover Pro (Android 13). Profiler connection needed adb forward and Enter IP 127.0.0.1:34999 as default ports didn't match.
+- GC: 51 B/frame, all Input System; spawner/pool 0 B. Frame time 16.70/16.71 ms without Profiler; Profiler overhead causes 33 ms frames on this phone.
