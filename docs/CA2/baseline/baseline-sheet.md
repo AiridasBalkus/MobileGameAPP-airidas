@@ -13,3 +13,10 @@
 | APK size (MB) | 52.9 |
 | Thermal delta, throttling (Week 7) | |
 | Load time (Week 5) | |
+| Field | Row 2 (Week 5) |
+|-------|----------------|
+| Date, commit, build | 5 Oct 2026, v0.3.0-skeleton, Dev build |
+| Device | Samsung Galaxy XCover Pro (SM-G715FN), Android 13, Exynos 9611 / Mali-G72 (OPPO broken; not directly comparable with row 1) |
+| Steady gameplay with spawning: avg / p99 | 16.70 / 16.71 ms (Profiler detached, ~5 min run); 21-24 / 33.4 ms with Profiler attached |
+| GC per frame | 51 B, all from NativeInputSystem.NotifyBeforeUpdate (Input System); 0 B from ObstacleSpawner / ObstaclePool / Obstacle |
+| Change | Obstacles pooled (24 prewarmed) and recycled relative to the player; spawner converted to an Awaitable loop |

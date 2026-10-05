@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Bootstrap : MonoBehaviour
 {
@@ -12,5 +13,7 @@ public class Bootstrap : MonoBehaviour
                   $"{SystemInfo.operatingSystem} | " +
                   $"{SystemInfo.graphicsDeviceType} | " +
                   $"{Screen.width}x{Screen.height} @ {Screen.dpi} dpi");
+        DontDestroyOnLoad(gameObject);
     }
+    async Awaitable Start() => await SceneManager.LoadSceneAsync("Menu");
 }

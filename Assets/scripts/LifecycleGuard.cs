@@ -4,7 +4,7 @@ public class LifecycleGuard : MonoBehaviour
     public static bool IsPaused { get; private set; }
     public static event System.Action<bool> PausedChanged;
 
-    void Start() => SetPaused(true);
+    void Start() => SetPaused(false);
     // Home, app switch, incoming call, screen off: save HERE.
     void OnApplicationPause(bool paused)
     {

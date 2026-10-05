@@ -2,8 +2,14 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public float despawnDistanceZ = -10f; //distance behind the player to despawn obstacles - AIRIDAS REMEBER TO CHANGE IT AND HAVE OBJECT POOOLING
-
+    [SerializeField] float despawnBehind = 10f;
+    ObstaclePool _pool;
+    Transform _player;
+    public Obstacle Init(ObstaclePool pool, Transform player)
+    {
+        _pool = pool; _player = player; return this;
+    }
+    void OnEnable() { }
     private void Reset()
     {
         GetComponent<Collider>().isTrigger = true; //make sure the collider is a trigger
@@ -18,10 +24,8 @@ public class Obstacle : MonoBehaviour
     }
     void Update()
     {
-        if(transform.position.z < despawnDistanceZ)
-        {
-            Destroy(gameObject); //destroy the obstacle if it goes behind the player
-        }
+        if(transform.position.z < _player.position.z - despawnBehind)
+            _pool.Release(this);
     }
 
 }

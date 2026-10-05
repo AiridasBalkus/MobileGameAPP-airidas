@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
     public void OnHitObstacle()
     {
         Haptics.Pulse();
-        Debug.Log("[HIT]Player hit an obstacle!");
+        gameManager.Lose();
     }
 }
