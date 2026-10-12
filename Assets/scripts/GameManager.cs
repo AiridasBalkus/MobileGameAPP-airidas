@@ -13,40 +13,50 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] LaneRunner runner;
     [SerializeField] float resultDelay = 1f; // seconds to wait before going to result scene
+    [SerializeField] float finishDistance = 1200f;
+    [SerializeField] int pickupValue = 10;
+    int _bonus;
+    public int Distance => Mathf.Max(0, Mathf.FloorToInt(runner.transform.position.z - _startZ));
+    public int Score => Distance + _bonus;
+
+    public static bool LastRunWon { get; private set; }
     float _startZ;
-    public int Score => Mathf.Max(0, Mathf.FloorToInt(runner.transform.position.z - _startZ));
 
     void OnEnable() => LifecycleGuard.PausedChanged += OnPausedChanged;
     void OnDisable() => LifecycleGuard.PausedChanged -= OnPausedChanged;
-
+    public void AddPickup() { if (Current == State.Playing) _bonus += pickupValue; }
     void Start()
     {
         _startZ = runner.transform.position.z;
         SetState(State.Playing);
     }
-
+    void Update()
+    {
+        if (Current == State.Playing && Distance >= finishDistance) Win();
+    }
+    public void Win() => EndRun(State.Won);
+    public void Lose() => EndRun(State.Lost);
     void OnPausedChanged(bool paused)
     {
         if (Current == State.Won || Current == State.Lost) return;
         SetState(paused ? State.Paused : State.Playing);
     }
-
-    public void Lose()
+    void EndRun(State end)
     {
-        if (Current == State.Lost) return;
-        SetState(State.Lost);
+        if (Current == State.Won || Current == State.Lost) return;
+        SetState(end);
         runner.enabled = false;
+        LastRunWon = end == State.Won;
         LastScore = Score;
         if (LastScore > HighScore) { PlayerPrefs.SetInt("highscore", LastScore); PlayerPrefs.Save(); }
         _ = GoToResultAsync(destroyCancellationToken);
     }
-
     async Awaitable GoToResultAsync(CancellationToken ct)
     {
         try
         {
             await Awaitable.WaitForSecondsAsync(resultDelay, ct);
-            await SceneManager.LoadSceneAsync("Result");
+            _ = SceneLoader.Instance.Load("Result", Application.exitCancellationToken);
         }
         catch (OperationCanceledException) { Debug.Log("Result scene load canceled."); }
     }

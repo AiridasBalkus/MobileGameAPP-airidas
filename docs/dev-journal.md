@@ -82,3 +82,15 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Bug: obstacles vanished in front of the player. The new field reused the old name despawnDistanceZ, so the prefab kept its saved -10 and the check became "10 units ahead". Lesson: serialized prefab values override code defaults; renamed the field to despawnBehind.
 - Device: OPPO broken, profiled on Samsung XCover Pro (Android 13). Profiler connection needed adb forward and Enter IP 127.0.0.1:34999 as default ports didn't match.
 - GC: 51 B/frame, all Input System; spawner/pool 0 B. Frame time 16.70/16.71 ms without Profiler; Profiler overhead causes 33 ms frames on this phone.
+
+12 Oct 2026: Week 5 Lab B (greybox lane, SceneLoader)
+**Lane:** one greybox biome, 5 chunk types (Single, Pickup line, Wall, Zigzag, Corridor), speed ramp 5 to 12 units/s, finish at 1200 m. Full run ~2.5 min; crash ends it early. Chunk types unlock by distance (150 m, 400 m).
+- Roles by flat colour: floor grey, hazard red, pickup yellow, goal green.
+- Feedback: click on lane change, higher click + score +10 on pickup, camera shake + haptic on hit (Awaitable, no coroutine; click generated in code as a stub).
+- Bugs: (1) spawner hit an uninitialised pool. An async method runs synchronously until its first await, and the spawner's OnEnable ran before the pool's Awake; fixed with one NextFrameAsync. (2) Fire-and-forget Awaitables swallow exceptions; added catch (Exception e) { Debug.LogException(e); } to every loop.
+- SceneLoader: persistent on App in Boot, static Instance, IsLoading guard (double taps, back button ignored), try/finally so the loading screen always hides. Every scene change goes through it.
+- allowSceneActivation trap: with while (!op.isDone) the bar sat full forever. isDone can't become true until activation, which that loop never reaches. Reverted to progress < 0.9f.
+- Resilience: Home mid-load (5 s debug hold, dev builds only) completed and the loading screen hid; back button ignored while loading.
+- Perf (release, Samsung): cold start median 349 ms; interactive 2.51 s (mostly the Unity splash; candidate fix: disable splash); Menu into Game 110 ms; APK 31.2 MB. All within MDA budgets.
+- Playtest confusions: 1 Not knowing that they needed to swipe 2 Didn't know to collect the coins
+- First change: Not knowing that they needed to swipe
