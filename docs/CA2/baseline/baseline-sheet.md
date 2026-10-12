@@ -20,3 +20,11 @@
 | Steady gameplay with spawning: avg / p99 | 16.70 / 16.71 ms (Profiler detached, ~5 min run); 21-24 / 33.4 ms with Profiler attached |
 | GC per frame | 51 B, all from NativeInputSystem.NotifyBeforeUpdate (Input System); 0 B from ObstacleSpawner / ObstaclePool / Obstacle |
 | Change | Obstacles pooled (24 prewarmed) and recycled relative to the player; spawner converted to an Awaitable loop |
+| Field | Row 3 (Week 5 Lab B) |
+|-------|----------------------|
+| Date, build | 12 Oct 2026, v0.3.1, Release |
+| Device | Samsung Galaxy XCover Pro (SM-G715FN), Android 13 |
+| Cold start TotalTime (3 runs, median) | 324 / 349 / 405 ms, median 349 ms |
+| Time to interactive (Menu first frame) | 2.51 s median (2.45-2.58 s); includes Unity splash. Budget < 5 s: pass |
+| Scene load: Boot>Menu / Menu>Game / Game>Result | 266 ms / 110 ms (46 ms on Retry) / 64-85 ms |
+| APK size | 31.2 MB (budget < 100 MB) |

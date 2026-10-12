@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+        if (SceneLoader.IsLoading) return;
         var kb = Keyboard.current;
         if (kb == null || !kb.escapeKey.wasPressedThisFrame) return;
         guard.SetPaused(!LifecycleGuard.IsPaused);
