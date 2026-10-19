@@ -9,6 +9,7 @@ public class LaneRunner : MonoBehaviour
     public float startSpeed = 5f;
     public float maxSpeed = 12f;
     public float acceleration = 0.05f;
+    public float upgradeBonus = 0.35f;   // +35% lane-change speed per level
     int _currentLane;
     float _targetXPosition;
     float _speed;
@@ -27,7 +28,9 @@ public class LaneRunner : MonoBehaviour
         transform.position += Vector3.forward * _speed * Time.deltaTime; //Move forward
 
         Vector3 position = transform.position; // Get current position
-        position.x = Mathf.MoveTowards(position.x, _targetXPosition, laneChangeSpeed * Time.deltaTime); //smoothly move towards the target lane position
+        int level = Wallet.Instance ? Wallet.Instance.Level : 0;
+        float switchSpeed = laneChangeSpeed * (1f + upgradeBonus * level);
+        position.x = Mathf.MoveTowards(position.x, _targetXPosition, switchSpeed * Time.deltaTime);
         transform.position = position; //update the position
     }
 

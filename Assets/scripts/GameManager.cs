@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] float resultDelay = 1f; // seconds to wait before going to result scene
     [SerializeField] float finishDistance = 1200f;
     [SerializeField] int pickupValue = 10;
+    [SerializeField] int coinsPerPickup = 5;
     int _bonus;
     public int Distance => Mathf.Max(0, Mathf.FloorToInt(runner.transform.position.z - _startZ));
     public int Score => Distance + _bonus;
@@ -24,7 +25,12 @@ public class GameManager : MonoBehaviour
 
     void OnEnable() => LifecycleGuard.PausedChanged += OnPausedChanged;
     void OnDisable() => LifecycleGuard.PausedChanged -= OnPausedChanged;
-    public void AddPickup() { if (Current == State.Playing) _bonus += pickupValue; }
+    public void AddPickup()
+    {
+        if (Current != State.Playing) return;
+        _bonus += pickupValue;
+        if (Wallet.Instance) Wallet.Instance.Earn(coinsPerPickup);
+    }
     void Start()
     {
         _startZ = runner.transform.position.z;
