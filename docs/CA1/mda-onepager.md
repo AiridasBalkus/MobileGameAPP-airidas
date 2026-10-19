@@ -49,7 +49,13 @@ Device: OPPO Find X5 Pro (CPH2305), Snapdragon 8 Gen 1 / Adreno 730, Android 15.
 ## Monetisation (if any) & ethics notes
 - No monetisation planned for this module's scope. If published later, a one-time purchase or optional cosmetic-only IAP would be the model considered.
 - Explicitly will not use: loot boxes, pressure timers, non-stop ads.
-
+- Week 6 adds a soft-currency loop: coins are earned from pickups and spent on a
+  lane-change speed upgrade. Earned-only, this is progression, not monetisation.
+- The "Buy 500 coins" pack exists only as an IAP stub (FakePurchaseProvider) to demonstrate
+  the IPurchaseProvider architecture. If sold for real money it would be pay-to-win, which
+  this one-pager rules out, so a real release would either remove the pack or limit purchases
+  to cosmetics. The shop is only shown on the Result screen, never during a run.
+  
 ## Cuts list
 1. Scoring/combo multiplier system
 2. Second pickup type (shield/invincibility)

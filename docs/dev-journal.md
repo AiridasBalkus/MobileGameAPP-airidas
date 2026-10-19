@@ -94,3 +94,9 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Perf (release, Samsung): cold start median 349 ms; interactive 2.51 s (mostly the Unity splash; candidate fix: disable splash); Menu into Game 110 ms; APK 31.2 MB. All within MDA budgets.
 - Playtest confusions: 1 Not knowing that they needed to swipe 2 Didn't know to collect the coins
 - First change: Not knowing that they needed to swipe
+
+19 Oct 2026: Week 6 Lab A (Economy)
+- Scope change (after 16 Sep lock): added a soft-currency economy (coins from pickups,
+  lane-change speed upgrade) and a stubbed "Buy 500 coins" button, as required by Week 6 Lab A.
+  The coin pack is a non-functional IAP stub behind IPurchaseProvider; it is not planned
+  for any release (see MDA monetisation note).
