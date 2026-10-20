@@ -56,3 +56,4 @@ Earlier development builds (versionCodes 1–4) were sideloaded for testing only
 
 ## AI assistance
 Claude (Anthropic) was used as a step-by-step guide through the lab sheets: explaining settings and error logs, which I reviewed and edited. All builds, installs and measurements were run by me on my own device.
+- Week 6: I asked Claude to organise `Assets/scripts` into folders (Core, Player, Spawning, UI, Feedback, Debug, Economy). It moved the existing files with their `.meta` files; no script code was changed.
