@@ -13,7 +13,7 @@ public class CoinShop : MonoBehaviour
         _busy = true; buyButton.interactable = false;
         try
         {
-            if (await store.PurchaseAsync("coins_500"))
+            if (await store.PurchaseAsync("coins_500") && Wallet.Instance)
             {
                 Wallet.Instance.Earn(500);
                 Debug.Log($"[iap-stub] granted 500, coins now {Wallet.Instance.Coins}");

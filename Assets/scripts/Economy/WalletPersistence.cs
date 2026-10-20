@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Wallet))]
-public class WalletPerrsistence : MonoBehaviour
+public class WalletPersistence : MonoBehaviour
 {
     Wallet wallet;
 
@@ -17,5 +17,6 @@ public class WalletPerrsistence : MonoBehaviour
 
     void Save() => WalletSave.Save(wallet);
 
+    // Save on change and on pause; OnApplicationQuit is not reliable on Android.
     void OnApplicationPause(bool paused) { if (paused) Save(); }
 }

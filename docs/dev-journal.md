@@ -96,6 +96,9 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - First change: Not knowing that they needed to swipe
 
 19 Oct 2026: Week 6 Lab A (Economy)
+- Run 1 (wallet reset, no purchases): L1 0:36, L2 0:56, L3 2:17, finished 2:22
+- Run 2: L4 at 2:20, finished 2:22. ~812+ coins earned in ~4:40 of play (~175/min)
+- Projected L5 at ~8 min of play: both targets (first < 2:00, fifth by 10:00) met at 5 coins/pickup
 - Scope change (after 16 Sep lock): added a soft-currency economy (coins from pickups,
   lane-change speed upgrade) and a stubbed "Buy 500 coins" button, as required by Week 6 Lab A.
   The coin pack is a non-functional IAP stub behind IPurchaseProvider; it is not planned

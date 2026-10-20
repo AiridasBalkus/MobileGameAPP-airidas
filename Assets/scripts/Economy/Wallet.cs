@@ -9,7 +9,11 @@ public class Wallet : MonoBehaviour
     public event System.Action Changed;
     public int NextCost => (int)(100 * Mathf.Pow(1.5f, Level));
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        if (Instance && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
 
     public void Earn(int n) { Coins += n; Changed?.Invoke(); }
 
