@@ -9,7 +9,11 @@ public class Wallet : MonoBehaviour
     public event System.Action Changed;
     public int NextCost => (int)(100 * Mathf.Pow(1.5f, Level));
 
-    void Awake() => Instance = this;
+    void Awake()
+    {
+        if (Instance && Instance != this) { Destroy(gameObject); return; }
+        Instance = this;
+    }
 
     public void Earn(int n) { Coins += n; Changed?.Invoke(); }
 
@@ -17,7 +21,12 @@ public class Wallet : MonoBehaviour
 
     public bool TryUpgrade()
     {
-        if (Coins < NextCost) return false;
-        Coins -= NextCost; Level++; Changed?.Invoke(); return true;
+        int cost = NextCost;
+        if (Coins < cost) return false;
+        Coins -= cost; Level++;
+        Telemetry.Log("upgrade_purchased", ("upgrade_id", "speed"), ("level", Level),
+            ("cost", cost), ("coins_left", Coins));
+        Changed?.Invoke();
+        return true;
     }
 }

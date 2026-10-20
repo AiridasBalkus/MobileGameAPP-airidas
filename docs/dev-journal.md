@@ -96,7 +96,29 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - First change: Not knowing that they needed to swipe
 
 19 Oct 2026: Week 6 Lab A (Economy)
+- Run 1 (wallet reset, no purchases): L1 0:36, L2 0:56, L3 2:17, finished 2:22
+- Run 2: L4 at 2:20, finished 2:22. ~812+ coins earned in ~4:40 of play (~175/min)
+- Projected L5 at ~8 min of play: both targets (first < 2:00, fifth by 10:00) met at 5 coins/pickup
 - Scope change (after 16 Sep lock): added a soft-currency economy (coins from pickups,
   lane-change speed upgrade) and a stubbed "Buy 500 coins" button, as required by Week 6 Lab A.
   The coin pack is a non-functional IAP stub behind IPurchaseProvider; it is not planned
   for any release (see MDA monetisation note).
+- Earn amount: before 5 coins/pickup into after 5 (unchanged; first upgrade at 0:36 already beat the 2:00 target)
+- Upgrades bought in the first 3 min of play: 3 (run 1 ended at 2:22, before the 3:00 mark)
+- Upgrade: lane-change speed +35%/level. Players feel it because lane change is Mino's only verb;
+  faster switches make the late-run walls and zigzags dodgeable.
+
+20 Oct 2026: Week 6 Lab B (Telemetry)
+- Events: session_start, level_start, level_complete, level_fail, upgrade_purchased (+ purchase_stub). Local only: logcat + telemetry.log in persistentDataPath. Map: docs/CA2/Economy_Telemetry_Map.md
+- Verified: upgrade_purchased logs the price paid (cost=100, 150, 225, 337); coins in level_start match previous coins_earned + stub purchases − upgrades; exactly one level_fail/level_complete per run.
+- Cold start to first script: ~2.2–2.4 s on the XCover (session_start timestamp).
+
+### Save/resume:
+- Home + resume (monkey): PASS, coins unchanged, app returned paused
+- Force-stop (outside run): PASS, 163 → loaded 163
+- am kill while backgrounded: PASS, 163 → loaded 163
+
+- Log pulled to docs/CA2/telemetry/telemetry.log: 5+ sessions with distinct ids.
+- Finding: 2 of 6 logged runs failed at 19 m / 3.8 s, one with no upgrade taps. The first chunk spawns at 20 m and can block the start (middle) lane right after Retry. Week 9 fix candidate: first chunk always a pickup line, or start it further away.
+
+- Async Pack 1 (Monetisation Models and Ethics) due Sun 1 Nov 2026, 23:59 (end of Reading Week, 26–30 Oct)

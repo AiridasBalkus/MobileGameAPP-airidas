@@ -8,11 +8,12 @@ public static class WalletSave
     {
         PlayerPrefs.SetInt(CoinsKey, w.Coins);
         PlayerPrefs.SetInt(LevelKey, w.Level);
-        PlayerPrefs.Save();
+        PlayerPrefs.Save();                     // flush to disk now
     }
 
     public static void Load(Wallet w) =>
         w.Restore(PlayerPrefs.GetInt(CoinsKey, 0), PlayerPrefs.GetInt(LevelKey, 0));
+
     public static void Reset(Wallet w)
     {
         PlayerPrefs.DeleteKey(CoinsKey);

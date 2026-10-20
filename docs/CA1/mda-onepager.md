@@ -48,7 +48,7 @@ Device: OPPO Find X5 Pro (CPH2305), Snapdragon 8 Gen 1 / Adreno 730, Android 15.
 
 ## Monetisation (if any) & ethics notes
 - No monetisation planned for this module's scope. If published later, a one-time purchase or optional cosmetic-only IAP would be the model considered.
-- Explicitly will not use: loot boxes, pressure timers, non-stop ads.
+- Explicitly will not use: loot boxes, pressure timers, non-stop ads, or pay-to-win speed/score boosts.
 - Week 6 adds a soft-currency loop: coins are earned from pickups and spent on a
   lane-change speed upgrade. Earned-only, this is progression, not monetisation.
 - The "Buy 500 coins" pack exists only as an IAP stub (FakePurchaseProvider) to demonstrate
@@ -66,7 +66,7 @@ Device: OPPO Find X5 Pro (CPH2305), Snapdragon 8 Gen 1 / Adreno 730, Android 15.
 - **Obstacle leak / no pooling (known, measured Week 3):** obstacles are never destroyed, so physics and script time grow over a run (0.62 to 1.15 ms physics in 33 s). Mitigation: despawn relative to the player and pool obstacles (Week 5).
 - **Single test device:** only one physical phone; the x86_64 emulator cannot run the ARM64 build. Mitigation: borrow a second phone before CA2 and record it in the device matrix.
 - **Thermal throttling on the Snapdragon 8 Gen 1:** sustained runs may slow down. Mitigation: measure in Week 7 and keep the frame budget headroom.
-- **Schedule:** pickups, score and speed ramp are not built yet. Mitigation: the cuts list below applies in order if Week 6 slips.
+- **Schedule:** core loop and economy built by Week 6; remaining risk is CA2 polish. Mitigation: cuts list applies in order.
 
 ## Scope lock
 - **Locked on:** Wed 16 Sep 2026
