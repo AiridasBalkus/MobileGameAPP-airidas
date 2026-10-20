@@ -6,6 +6,12 @@ public class Bootstrap : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = 60;
+        Telemetry.Log("session_start",
+        ("app_version", Application.version),
+        ("device_model", SystemInfo.deviceModel),
+        ("android", SystemInfo.operatingSystem));
+        Debug.Log($"[telemetry] file {Telemetry.FilePath}");
+
         QualitySettings.vSyncCount = 0;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
 
