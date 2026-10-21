@@ -1,0 +1,45 @@
+10-21 14:11:25.896 27769 28033 I Unity   : [AP] active warning=NoWarning level=0.81
+10-21 14:11:25.919 27769 28033 I Unity   : [AP] thermal warning=NoWarning level=0.81 trend=0.00
+10-21 14:11:36.954 27769 28033 I Unity   : [AP] thermal warning=NoWarning level=0.83 trend=0.05
+10-21 14:11:40.386 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:11:40.690 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:11:41.734 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:11:48.468 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:11:49.871 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:11:50.546 27769 28033 I Unity   : [AP] thermal warning=ThrottlingImminent level=0.83 trend=0.52
+10-21 14:11:52.673 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:11:55.923 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:11:56.280 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:12:12.570 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:15.572 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:12:17.170 27769 28033 I Unity   : [AP] thermal warning=ThrottlingImminent level=0.86 trend=0.02
+10-21 14:12:17.256 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:17.271 27769 28033 I Unity   : [AP] bottleneck=TargetFrameRate
+10-21 14:12:19.407 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:12:23.460 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:24.056 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:12:24.541 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:25.674 27769 28033 I Unity   : [AP] bottleneck=TargetFrameRate
+10-21 14:12:27.175 27769 28033 I Unity   : [AP] thermal warning=ThrottlingImminent level=0.89 trend=0.98
+10-21 14:12:27.785 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:29.757 27769 28033 I Unity   : [AP] bottleneck=TargetFrameRate
+10-21 14:12:33.892 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:35.578 27769 28033 I Unity   : [AP] bottleneck=TargetFrameRate
+10-21 14:12:36.422 27769 28033 I Unity   : [AP] bottleneck=GPU
+10-21 14:12:36.727 27769 28033 I Unity   : [AP] bottleneck=Unknown
+10-21 14:12:37.174 27769 28033 I Unity   : [AP] thermal warning=ThrottlingImminent level=0.90 trend=1.00
+
+10-21 14:51:17.314 15146 15230 I Unity   : [perf] perf_mode=Balanced high=False fps=60 scale=1.0 asset=Mobile_RPAsset
+10-21 14:51:20.324 15146 15230 I Unity   : [AP] bottleneck=GPU
+10-21 14:51:38.219 15146 15230 I Unity   : [Baseline] avg 38.82 ms  p99 83.26 ms
+10-21 14:51:54.433 15146 15230 I Unity   : [Baseline] avg 27.03 ms  p99 49.96 ms
+10-21 14:52:10.548 15146 15230 I Unity   : [Baseline] avg 26.87 ms  p99 50.02 ms
+10-21 14:52:17.604 15146 15230 I Unity   : [perf] perf_mode=HighFps high=True fps=120 scale=0.8 asset=Mobile_RPAsset
+10-21 14:52:29.239 15146 15230 I Unity   : [Baseline] avg 31.16 ms  p99 50.02 ms
+10-21 14:52:35.407 15146 15230 I Unity   : [AP] bottleneck=Unknown
+10-21 14:52:35.427 15146 15230 I Unity   : [AP] bottleneck=GPU
+10-21 14:52:43.745 15146 15230 I Unity   : [Baseline] avg 24.17 ms  p99 49.98 ms
+10-21 14:52:57.826 15146 15230 I Unity   : [Baseline] avg 23.48 ms  p99 33.43 ms
+10-21 14:53:11.497 15146 15230 I Unity   : [Baseline] avg 22.78 ms  p99 33.38 ms
+10-21 14:53:17.524 15146 15230 I Unity   : [AP] bottleneck=Unknown
+10-21 14:53:24.932 15146 15230 I Unity   : [AP] bottleneck=GPU

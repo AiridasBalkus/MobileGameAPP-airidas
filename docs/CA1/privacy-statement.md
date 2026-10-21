@@ -13,6 +13,7 @@ Game progress and player settings, stored with Unity `PlayerPrefs` (Android Shar
 | highscore | int | Best score, shown on the Result screen |
 | wallet.coins | int | Soft-currency balance earned in play |
 | wallet.level | int | Upgrade level bought with coins |
+| perf_mode | int (0/1) | Balanced or High FPS setting |
 
 None of these values identify the player or the device.
 
