@@ -13,3 +13,5 @@
   OPPO, which was CPU-bound in Week 3.
 - Phone was already warm (AP temperature level 0.80–0.87, WarningLevel NoWarning). Week 5 measured
   16.7 ms on the same phone, so this may be thermal; to be checked from a cool start in the Lab B soak.
+
+- Follow-up (Week 7 Lab B, 3 Nov): the cool-start check was done on the Galaxy S24 Ultra instead (XCover no longer the test phone). On the S24, Balanced holds 16.6 ms and High FPS 8.3 ms for 10 minutes from a cool start with no throttling (see baseline-sheet Row 4). The XCover's 27 ms in this table remains unexplained; it was probably thermal, since the phone was already at AP level 0.80-0.87.

@@ -1,9 +1,9 @@
 ### This the README for my mobile game MINO
 ## Device Info
-Device Model OPPO Find X5 Pro
-Android Version: Android OS 15
+Device Model: Samsung Galaxy S24 Ultra (SM-S928U1), current test phone from Week 7 Lab B
+Android Version: Android OS 17 / API-37
 Graphics API: VULKAN
-[Boot] OPPO CPH2305 | Android OS 15 / API-35 (AP3A.240617.008/S.205cac3-124d3-124d5) | Vulkan | 2412x1080 @ 480 dpi
+Previous: OPPO Find X5 Pro (broken Week 5), Samsung Galaxy XCover Pro (Weeks 5 to 7 Lab A)
 
 ## Key INFO
 key name: mygame-release   Location: C:\\Users\\jeffe\\Documents\\keystore, alias name: mygame-release, validity period: 50 years
@@ -52,8 +52,9 @@ Earlier development builds (versionCodes 1–4) were sideloaded for testing only
 - Minimum API: 26 (Android 8.0); target API: 36 (Automatic)
 - Current Play target API policy: https://support.google.com/googleplay/android-developer/answer/11926878
 - ABI: arm64-v8a only
-- Tested: see docs/CA1/device-matrix.md (OPPO Find X5 Pro, Android 15: runs; x86_64 emulator: installs, does not run under ARM64 translation)
+- Tested: see docs/CA1/device-matrix.md (Galaxy S24 Ultra, Android 17: runs, current; XCover Pro, Android 13: runs; OPPO Find X5 Pro: ran until broken; x86_64 emulator: installs, does not run under ARM64 translation)
 
 ## AI assistance
 Claude (Anthropic) was used as a step-by-step guide through the lab sheets: explaining settings and error logs, which I reviewed and edited. All builds, installs and measurements were run by me on my own device.
 - Week 6: I asked Claude to organise `Assets/scripts` into folders (Core, Player, Spawning, UI, Feedback, Debug, Economy). It moved the existing files with their `.meta` files; no script code was changed.
+- Week 7 Lab B: Claude guided the thermal soak step by step, calculated the p99 values from my Profile Analyzer CSV exports and summarised my logcat files
