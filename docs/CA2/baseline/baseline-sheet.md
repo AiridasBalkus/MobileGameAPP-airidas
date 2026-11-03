@@ -28,3 +28,22 @@
 | Time to interactive (Menu first frame) | 2.51 s median (2.45-2.58 s); includes Unity splash. Budget < 5 s: pass |
 | Scene load: Boot>Menu / Menu>Game / Game>Result | 266 ms / 110 ms (46 ms on Retry) / 64-85 ms |
 | APK size | 31.2 MB (budget < 100 MB) |
+
+| Thermal delta, throttling (Week 7) | Not measured on this phone (OPPO broken in Week 5); see Row 4 (S24 Ultra) |
+| Field | Row 4 (Week 7 Lab B, thermal soak) |
+|-------|------------------------------------|
+| Date, commit, build | 3 Nov 2026, 4dc1695, v0.4.0 / 4, Dev build (Development Build on for Profiler) |
+| Device | Samsung Galaxy S24 Ultra (SM-S928U1), Android 17 / API 37, Snapdragon 8 Gen 3 for Galaxy, Vulkan, 120 Hz (new test phone; not directly comparable with rows 1-3) |
+| Mode | Balanced (60 fps), Game scene, fresh run from Retry, crashes retried immediately |
+| Start temperature (C) | 27.8 battery / 29.6 skin, Thermal Status 0, 18:18:21 |
+| End temperature (C) and 10-minute delta | 28.2 battery / 30.9 skin at 18:30:42 (19 s after end); delta +0.4 C battery, +1.3 C skin |
+| Overlay level at minute 0 / 5 / 10 | 0.46 / 0.51 / 0.52, NoWarning at all three (16.6 / 16.7 / 16.6 ms) |
+| First ThrottlingImminent (minute, logcat time) | Not observed in 10 min; max AP level 0.53 (logcat 18:25:28) |
+| Throttling observed (yes/no, minute) | No; Android Thermal Status 0 throughout |
+| Frame time before: mean / 99th (ms) | 16.64 / 18.72 |
+| Frame time after: mean / 99th (ms) | 16.64 / 18.59 (Compare: mean -0.01, median -0.02, max 25.42 -> 22.00) |
+| Conditions | Unplugged (wireless adb), 70% battery, brightness ~50% (adaptive off), case off, other apps closed, ambient ~18C |
+| High FPS soak (extra) | 120 fps (8.3 ms) held 10 min; AP level 0.50 -> 0.60, NoWarning, no throttling; 27.7 -> 29.4 C battery (read 5.5 min after end, so delta of at least +1.7 C is understated) |
+| Method notes | Temperature from `adb shell dumpsys thermalservice` (BAT/SKIN, HAL current): `dumpsys battery` shows only history on Samsung and /sys is permission-denied on Android 17. Profiler CPU + Rendering only, 2000-frame buffer (last ~33 s of each 60 s capture). p99 calculated from Profile Analyzer "Single Frame Times" CSV export (no p99 in Frame Summary). Skin throttle thresholds start at 38 C. |
+| Sustained budget | 16.7 ms at 60 fps, same as burst; ~5.4 ms real work per frame (PlayerLoop 16.58 - WaitForSignal 11.20), ~11 ms headroom, no throttling in 10 min |
+| Evidence | docs/CA2/baseline/thermal-soak/: before/after .data + .pdata + frameTime.csv, compare.png, logcat-soak.txt, logcat-soak-highfps.txt, minute-00/05/10.jpg (phone screenshots, kept as JPG), highfps-minute-00.png + highfps-minute-05/10.jpg |

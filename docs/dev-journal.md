@@ -113,12 +113,24 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Verified: upgrade_purchased logs the price paid (cost=100, 150, 225, 337); coins in level_start match previous coins_earned + stub purchases − upgrades; exactly one level_fail/level_complete per run.
 - Cold start to first script: ~2.2–2.4 s on the XCover (session_start timestamp).
 
-### Save/resume:
+20 Oct 2026: Week 7 Lab A
 - Home + resume (monkey): PASS, coins unchanged, app returned paused
 - Force-stop (outside run): PASS, 163 → loaded 163
 - am kill while backgrounded: PASS, 163 → loaded 163
-
 - Log pulled to docs/CA2/telemetry/telemetry.log: 5+ sessions with distinct ids.
 - Finding: 2 of 6 logged runs failed at 19 m / 3.8 s, one with no upgrade taps. The first chunk spawns at 20 m and can block the start (middle) lane right after Retry. Week 9 fix candidate: first chunk always a pickup line, or start it further away.
-
 - Async Pack 1 (Monetisation Models and Ethics) due Sun 1 Nov 2026, 23:59 (end of Reading Week, 26–30 Oct)
+
+3 Nov 2026: Week 7 Lab B (thermal soak), done late on the new phone
+- Device change (after the 16 Sep lock): OPPO broken since Week 5, XCover used Weeks 5 to 7 Lab A. From Week 7 Lab B my own Galaxy S24 Ultra (SM-S928U1, Android 17) is the test phone. MDA budget was written for the OPPO; CA2 numbers from now are from the S24.
+- ThermalOverlay.cs on the HUD (ms, WarningLevel, TemperatureLevel, trend); label refreshes 4x/s to avoid per-frame string allocation.
+- Wireless adb kept the phone unplugged. Two entries for one phone gave "more than one device"; fixed with set ANDROID_SERIAL=ip:port (port changes after drops).
+- Temperature from dumpsys thermalservice (BAT/SKIN); dumpsys battery only shows history on Samsung, /sys is permission-denied.
+- First soak accidentally ran at 120 fps (High FPS left on), so before (60) and after weren't comparable. Kept it as the High FPS soak and redid Balanced after cooling back to 27.8 C.
+- Balanced: +0.4 C in 10 min, NoWarning throughout, max AP level 0.53. Frame time before 16.64 / 18.72 ms, after 16.64 / 18.59 ms: no change.
+- High FPS: 8.3 ms held 10 min, AP level 0.50 -> 0.60, at least +1.7 C, no throttling.
+- First-chunk bug again: died at 19 m / 3.8 s (Balanced) and 25 m / 4.9 s (High FPS). 4 times total including Week 6.
+- GC now ~99 B/frame (was 51 B), 51 LogStringToConsole calls per capture: Debug.Log spam ([AP], [Baseline], telemetry).
+- Sustained budget: on the S24 it equals the burst budget, a locked 16.7 ms at 60 fps with ~11 ms headroom and no throttling after 10 min.
+- Change because of it: no need to cut quality for thermals, so Balanced stays default. Spend the time on the first-chunk fix (first chunk always a pickup line, or spawn it further away) and stripping Debug.Log from release builds to get GC back to 0 B.
+- Reading Week 26-30 Oct (no classes); back Mon 2 Nov (Week 8 Lab A, peer distribution with a release build). Async Pack 1 due Sun 1 Nov: submitted, CA2 due Sun 15 Nov 2026, 23:59: draft reflective bullets for Weeks 5-7.
