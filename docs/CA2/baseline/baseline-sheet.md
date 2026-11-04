@@ -47,3 +47,12 @@
 | Method notes | Temperature from `adb shell dumpsys thermalservice` (BAT/SKIN, HAL current): `dumpsys battery` shows only history on Samsung and /sys is permission-denied on Android 17. Profiler CPU + Rendering only, 2000-frame buffer (last ~33 s of each 60 s capture). p99 calculated from Profile Analyzer "Single Frame Times" CSV export (no p99 in Frame Summary). Skin throttle thresholds start at 38 C. |
 | Sustained budget | 16.7 ms at 60 fps, same as burst; ~5.4 ms real work per frame (PlayerLoop 16.58 - WaitForSignal 11.20), ~11 ms headroom, no throttling in 10 min |
 | Evidence | docs/CA2/baseline/thermal-soak/: before/after .data + .pdata + frameTime.csv, compare.png, logcat-soak.txt, logcat-soak-highfps.txt, minute-00/05/10.jpg (phone screenshots, kept as JPG), highfps-minute-00.png + highfps-minute-05/10.jpg |
+| Field | Row 5 (Week 8 Lab B, start-up and memory) |
+|-------|-------------------------------------------|
+| Date, build | 4 Nov 2026, v0.8.0 / 5, build 08279012, Release |
+| Device | Samsung Galaxy S24 Ultra (SM-S928U1), Android 17 / API 37 |
+| Launch activity | com.unity3d.player.UnityPlayerGameActivity (GameActivity, not UnityPlayerActivity) |
+| Cold start TotalTime (3 runs, median) | 118 / 125 / 107 ms, median 118 ms (first launch after install excluded: LaunchState UNKNOWN, WaitTime 3021 ms) |
+| Warm start TotalTime (Android: HOT, 3 runs) | 77 / 31 / 34 ms, median 34 ms |
+| Time to interactive (Menu, [perf] interactive) | 2.24-2.33 s, median ~2.29 s (mostly Unity splash). Budget < 5 s: pass |
+| TOTAL PSS after ~5 min play | 325,924 KB (~318 MB); RSS 442,916 KB; swap PSS 75 KB. Budget < 600 MB: pass. Not comparable with row 1 (OPPO, 176.6 MB) |
