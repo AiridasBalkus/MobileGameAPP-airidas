@@ -135,7 +135,7 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Change because of it: no need to cut quality for thermals, so Balanced stays default. Spend the time on the first-chunk fix (first chunk always a pickup line, or spawn it further away) and stripping Debug.Log from release builds to get GC back to 0 B.
 - Reading Week 26-30 Oct (no classes); back Mon 2 Nov (Week 8 Lab A, peer distribution with a release build). Async Pack 1 due Sun 1 Nov: submitted, CA2 due Sun 15 Nov 2026, 23:59: draft reflective bullets for Weeks 5-7.
 
-4 Nov 2026: Week 8 Lab A (peer distribution), done a day late
+4 Nov 2026: Week 8 Lab A (peer distribution)
 - Version 0.8.0, versionCode 4 -> 5. Release-signed, IL2CPP, ARM64, Development Build off; Adaptive Performance logging turned off ("logging quiet").
 - About panel in Menu with BuildStamp.cs (version, 8-char buildGUID, device, Android, RAM, resolution, Hz, form link) and a "Give feedback" button (Application.OpenURL). Android back closes the panel (Escape in the Input System).
 - session_start now logs version, build and device. Verified: About shows 08279012, logcat session_start build=08279012, dumpsys versionName=0.8.0 / versionCode=5.
@@ -144,3 +144,11 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Created the form before building so the link is in the APK; did Part B before Part A to avoid building and uploading twice.
 - Feedback form live (anonymous, 12 fields). Peer installs (Part D) on 5 Nov.
 - Async Pack 3 (Peer APK Distribution & Survey) live until Sun 29 Nov 2026: 10+ testers, CSV export, 5 to 8 insights in docs/CA3/qa/survey/insights.md.
+
+4 Nov 2026: Week 8 Lab B (QA evidence)
+- Build uses GameActivity: launch activity is UnityPlayerGameActivity, not UnityPlayerActivity ("Error type 3" until fixed).
+- Cold start median 118 ms, warm (HOT) 34 ms, interactive ~2.29 s, PSS ~318 MB after 5 min (baseline Row 5).
+- Test plan: resume (11 cycles), no network, rotation, low RAM and cold/warm start passed; battery saver not run (Samsung won't enable Power saving while USB-charging at 100%).
+- USB cable instead of wireless adb so airplane mode wouldn't drop adb.
+- Recorder stopped mid-lab (16:44-17:00); recovered from the phone's log buffer. Lesson: don't stop the recorder to share the file.
+- Worst failure: KI-01. The first chunk blocks the start lane in ~50% of runs (Single p=1/3 at 20 m, PickupLine block p=2/3 at 26 m). Filed with cause and fix; fix ships in the next build. KI-02: nav bar covers the score when swiped in.
