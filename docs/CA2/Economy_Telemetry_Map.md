@@ -2,7 +2,7 @@
 
 | Event | Parameters (type) | Fires when | Question it answers |
 |-------|-------------------|------------|---------------------|
-| `session_start` | `app_version` (string), `device_model` (string), `android` (string) | `Bootstrap.Awake`, once per launch | Which build and device produced this log |
+|| `session_start` | `version` (string), `build` (string, 8-char buildGUID prefix), `device` (string), `android` (string) | `Bootstrap.Awake`, once per launch | Which exact binary and device produced this log (renamed from app_version/device_model in Week 8) |
 | `level_start` | `level_id` (int), `attempt` (int), `coins` (int) | `GameManager.Start`, lane becomes playable | How many retries per session; how much wealth players bring in |
 | `level_complete` | `level_id` (int), `time_s` (float), `coins_earned` (int), `score` (int) | Win (finish line at 1200 m) | Run length and earn rate on success |
 | `level_fail` | `level_id` (int), `time_s` (float), `cause` (id), `distance` (int, m), `coins_earned` (int) | Lose (obstacle hit) | Where players die (distance) and earn rate on failure |
