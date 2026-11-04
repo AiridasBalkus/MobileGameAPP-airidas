@@ -134,3 +134,13 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Sustained budget: on the S24 it equals the burst budget, a locked 16.7 ms at 60 fps with ~11 ms headroom and no throttling after 10 min.
 - Change because of it: no need to cut quality for thermals, so Balanced stays default. Spend the time on the first-chunk fix (first chunk always a pickup line, or spawn it further away) and stripping Debug.Log from release builds to get GC back to 0 B.
 - Reading Week 26-30 Oct (no classes); back Mon 2 Nov (Week 8 Lab A, peer distribution with a release build). Async Pack 1 due Sun 1 Nov: submitted, CA2 due Sun 15 Nov 2026, 23:59: draft reflective bullets for Weeks 5-7.
+
+4 Nov 2026: Week 8 Lab A (peer distribution), done a day late
+- Version 0.8.0, versionCode 4 -> 5. Release-signed, IL2CPP, ARM64, Development Build off; Adaptive Performance logging turned off ("logging quiet").
+- About panel in Menu with BuildStamp.cs (version, 8-char buildGUID, device, Android, RAM, resolution, Hz, form link) and a "Give feedback" button (Application.OpenURL). Android back closes the panel (Escape in the Input System).
+- session_start now logs version, build and device. Verified: About shows 08279012, logcat session_start build=08279012, dumpsys versionName=0.8.0 / versionCode=5.
+- First build (375b9535) had a duplicated resolution line; rebuilt before sharing. Uploading with the same file name and choosing Replace on OneDrive kept the same share link, so the QR didn't change.
+- Stamp reports 60 Hz on a 120 Hz panel: Screen.currentResolution gives the current mode, and Samsung drops to 60 Hz while Mino runs at 60 fps.
+- Created the form before building so the link is in the APK; did Part B before Part A to avoid building and uploading twice.
+- Feedback form live (anonymous, 12 fields). Peer installs (Part D) on 5 Nov.
+- Async Pack 3 (Peer APK Distribution & Survey) live until Sun 29 Nov 2026: 10+ testers, CSV export, 5 to 8 insights in docs/CA3/qa/survey/insights.md.

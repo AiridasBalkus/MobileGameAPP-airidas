@@ -17,9 +17,12 @@ Game progress and player settings, stored with Unity `PlayerPrefs` (Android Shar
 
 None of these values identify the player or the device.
 
-**Local telemetry log.** Gameplay events (session start, run start/end, upgrades, stub purchases) are appended to `telemetry.log` in `Application.persistentDataPath` (`/storage/emulated/0/Android/data/com.airidasbalkus.mino/files/`). Each line holds a timestamp, a random 8-character session id generated at launch (not linked to the player or device identity), the app version, the device model and Android version, and game numbers (distance, time, coins, score). The file is never transmitted; it is read only by the developer over USB (`adb`) for balancing. It grows over time and is removed by uninstalling or clearing storage. See `docs/CA2/Economy_Telemetry_Map.md` for the full event list.
+**Local telemetry log.** Gameplay events (session start, run start/end, upgrades, stub purchases) are appended to `telemetry.log` in `Application.persistentDataPath` (`/storage/emulated/0/Android/data/com.airidasbalkus.mino/files/`). Each line holds a timestamp, a random 8-character session id generated at launch (not linked to the player or device identity), the app version and build ID (first 8 characters of Unity's build GUID, identical for every install of the same APK), the device model and Android version, and game numbers (distance, time, coins, score). The file is never transmitted; it is read only by the developer over USB (`adb`) for balancing. It grows over time and is removed by uninstalling or clearing storage. See `docs/CA2/Economy_Telemetry_Map.md` for the full event list.
 
 **To remove all stored data:** uninstall the app, or use Settings > Apps > Mino > Storage > Clear data.
+
+## Closed-test feedback form (Week 8)
+The About screen links to an anonymous Microsoft Forms survey (SETU account, names and emails not recorded). Filling it in is voluntary and happens outside the app; the app itself still sends nothing. Responses are exported to CSV for the CA3 QA evidence pack.
 
 ## Network activity
 None. No code uses UnityWebRequest, sockets or any online service (verified by searching the source for network APIs).
