@@ -152,3 +152,11 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - USB cable instead of wireless adb so airplane mode wouldn't drop adb.
 - Recorder stopped mid-lab (16:44-17:00); recovered from the phone's log buffer. Lesson: don't stop the recorder to share the file.
 - Worst failure: KI-01. The first chunk blocks the start lane in ~50% of runs (Single p=1/3 at 20 m, PickupLine block p=2/3 at 26 m). Filed with cause and fix; fix ships in the next build. KI-02: nav bar covers the score when swiped in.
+
+5-9 Nov 2026: Week 8 Lab A, Part D (peer installs)
+- Two peers installed 0.8.0 (08279012) by QR: Galaxy S25 FE (Android 16, high tier) and Galaxy A15 (Android 14, 4 GB, low tier). Both worked first time, no crashes, both copied the correct build ID.
+- Peer 1 (5 min): smoothness 2, control 1, "one more go" 1; asked to "run faster" and "what does upgrade do?" into the start feels slow and the upgrade button is unexplained.
+- Peer 1 wrote "Pause doesn't pause" in the keep field: the HUD pause button was never covered by the test plan (only lifecycle pause). To verify.
+- Peer 2 (10 min, low-tier): mid scores (3-4) across the board, no comments.
+- Form fixes: Likert options exported as "Option 1-5" (renamed to 1-5); "Control responsiveness" split into two statements by mistake.
+- Pack 3 needs 10+ testers by Sun 29 Nov; 2 so far.

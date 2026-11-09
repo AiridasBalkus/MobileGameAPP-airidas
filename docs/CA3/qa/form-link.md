@@ -1,0 +1,1 @@
+CSV export: responses-0.8.0.csv (Forms "Open in Excel" export saved as CSV; Likert "Option N" converted to N; empty Email/Name columns removed).
