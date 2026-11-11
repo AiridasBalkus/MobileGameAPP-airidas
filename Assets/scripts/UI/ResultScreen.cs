@@ -11,5 +11,7 @@ public class ResultScreen : MonoBehaviour
         scoreText.SetText("Score {0}", GameManager.LastScore);
         bestText.SetText("Best {0}", GameManager.HighScore);
         titleText.SetText(GameManager.LastRunWon ? "Finished!" : "Crashed");
+        var audio = AudioService.Instance;
+        if (GameManager.LastRunNewBest && audio) audio.NewBest();
     }
 }

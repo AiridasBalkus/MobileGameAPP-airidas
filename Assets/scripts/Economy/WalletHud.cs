@@ -8,7 +8,19 @@ public class WalletHud : MonoBehaviour
     [SerializeField] TMP_Text upgradeLabel;
     [SerializeField] Button upgradeButton;
 
+    // W09: peers asked "what does upgrade do?", so the label names the effect and level.
+    const string UpgradeFormat = "Faster lane change  Lv {0}\n{1} coins";
+    const float DisabledTextAlpha = 0.45f;
+
     Wallet wallet;
+
+    void Awake()
+    {
+        // Two lines must fit the existing button rect: shrink to fit, never grow past the scene size.
+        upgradeLabel.enableAutoSizing = true;
+        upgradeLabel.fontSizeMax = upgradeLabel.fontSize;
+        upgradeLabel.fontSizeMin = 18f;
+    }
 
     void OnEnable()
     {
@@ -20,11 +32,15 @@ public class WalletHud : MonoBehaviour
 
     void OnDisable() { if (wallet != null) wallet.Changed -= Refresh; }
 
+    // Event-driven only (coins or level change), never per frame.
     void Refresh()
     {
         coinsLabel.SetText("{0}", wallet.Coins);
-        upgradeLabel.SetText("Upgrade ({0})", wallet.NextCost);
-        upgradeButton.interactable = wallet.Coins >= wallet.NextCost;
+        int cost = wallet.NextCost;
+        bool canAfford = wallet.Coins >= cost;
+        upgradeLabel.SetText(UpgradeFormat, (float)wallet.Level, (float)cost);
+        upgradeLabel.alpha = canAfford ? 1f : DisabledTextAlpha;
+        upgradeButton.interactable = canAfford;
     }
 
     public void OnUpgrade()

@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public int Score => Distance + _bonus;
 
     public static bool LastRunWon { get; private set; }
+    public static bool LastRunNewBest { get; private set; }  // read by ResultScreen
     float _startZ;
 
     void OnEnable() => LifecycleGuard.PausedChanged += OnPausedChanged;
@@ -74,7 +75,8 @@ public class GameManager : MonoBehaviour
         runner.enabled = false;
         LastRunWon = end == State.Won;
         LastScore = Score;
-        if (LastScore > HighScore) { PlayerPrefs.SetInt("highscore", LastScore); PlayerPrefs.Save(); }
+        LastRunNewBest = LastScore > HighScore;
+        if (LastRunNewBest) { PlayerPrefs.SetInt("highscore", LastScore); PlayerPrefs.Save(); }
         _ = GoToResultAsync(destroyCancellationToken);
     }
     async Awaitable GoToResultAsync(CancellationToken ct)
