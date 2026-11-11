@@ -9,7 +9,12 @@ public class ResultScreen : MonoBehaviour
     void Start()
     {
         scoreText.SetText("Score {0}", GameManager.LastScore);
-        bestText.SetText("Best {0}", GameManager.HighScore);
+        if (GameManager.LastRunNewBest)
+        {
+            bestText.SetText("New best! {0}", GameManager.HighScore);
+            bestText.color = new Color(1f, 0.85f, 0.2f);
+        }
+        else bestText.SetText("Best {0}", GameManager.HighScore);
         titleText.SetText(GameManager.LastRunWon ? "Finished!" : "Crashed");
         var audio = AudioService.Instance;
         if (GameManager.LastRunNewBest && audio) audio.NewBest();

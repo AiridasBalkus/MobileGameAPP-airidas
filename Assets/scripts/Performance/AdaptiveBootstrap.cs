@@ -10,13 +10,13 @@ public class AdaptiveBootstrap : MonoBehaviour
         ap = Holder.Instance;
         if (ap == null || !ap.Active)
         {
-            Debug.Log("[AP] provider inactive on this device");
+            DevLog.Log("[AP] provider inactive on this device");
             return;
         }
         ap.ThermalStatus.ThermalEvent += OnThermal;
         ap.PerformanceStatus.PerformanceBottleneckChangeEvent += OnBottleneck;
         var m = ap.ThermalStatus.ThermalMetrics;
-        Debug.Log($"[AP] active warning={m.WarningLevel} level={m.TemperatureLevel:0.00}");
+        DevLog.Log($"[AP] active warning={m.WarningLevel} level={m.TemperatureLevel:0.00}");
     }
 
     void OnDestroy()
@@ -28,12 +28,12 @@ public class AdaptiveBootstrap : MonoBehaviour
 
     void OnThermal(ThermalMetrics m)
     {
-        Debug.Log($"[AP] thermal warning={m.WarningLevel} " +
+        DevLog.Log($"[AP] thermal warning={m.WarningLevel} " +
                   $"level={m.TemperatureLevel:0.00} trend={m.TemperatureTrend:0.00}");
     }
 
     void OnBottleneck(PerformanceBottleneckChangeEventArgs e)
     {
-        Debug.Log($"[AP] bottleneck={e.PerformanceBottleneck}");
+        DevLog.Log($"[AP] bottleneck={e.PerformanceBottleneck}");
     }
 }

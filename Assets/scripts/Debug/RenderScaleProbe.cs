@@ -21,6 +21,6 @@ public class RenderScaleProbe : MonoBehaviour
     {
         bool atFull = Mathf.Approximately(_urp.renderScale, _full);
         _urp.renderScale = atFull ? lowScale : _full;
-        Debug.Log($"[Probe] renderScale = {_urp.renderScale}");
+        DevLog.Log($"[Probe] renderScale = {_urp.renderScale}");
     }
 }

@@ -17,7 +17,7 @@ public class ThermalOverlay : MonoBehaviour
     {
         ap = Holder.Instance;
         if (ap != null && ap.Active) ap.ThermalStatus.ThermalEvent += OnThermal;
-        else Debug.Log("[AP] inactive");
+        else DevLog.Log("[AP] inactive");
     }
 
     void OnDestroy() { if (ap != null && ap.Active) ap.ThermalStatus.ThermalEvent -= OnThermal; }
@@ -34,6 +34,6 @@ public class ThermalOverlay : MonoBehaviour
         label.SetText(Formats[(int)t.WarningLevel], ms, t.TemperatureLevel, t.TemperatureTrend);
     }
     void OnThermal(ThermalMetrics ev) =>
-        Debug.Log($"[AP] thermal warning={ev.WarningLevel} level={ev.TemperatureLevel:F2} " +
+        DevLog.Log($"[AP] thermal warning={ev.WarningLevel} level={ev.TemperatureLevel:F2} " +
                   $"trend={ev.TemperatureTrend:F2} t={Time.realtimeSinceStartup:F0}s");
 }

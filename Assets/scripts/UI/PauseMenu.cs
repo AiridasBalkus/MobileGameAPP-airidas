@@ -6,8 +6,7 @@ public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject panel;
     [SerializeField] LifecycleGuard guard;
-    // W09 (KI-03): its OnClick only did PausePanel.SetActive(true), so timeScale stayed 1
-    // and the run kept going behind the panel. We add the real pause call here at runtime.
+    // button only opened the panel, never paused (KI-03)
     [SerializeField] Button pauseButton;
     GameManager _game;
 
@@ -41,7 +40,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OnPausePressed()
     {
-        // No pausing once the run has ended: it would freeze the scaled-time wait before the Result scene.
+        // don't pause after the run has ended
         bool ended = _game && (_game.Current == GameManager.State.Won || _game.Current == GameManager.State.Lost);
         if (ended || !guard) { panel.SetActive(false); return; }
         if (!LifecycleGuard.IsPaused) guard.SetPaused(true);

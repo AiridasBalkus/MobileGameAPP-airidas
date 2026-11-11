@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public int Score => Distance + _bonus;
 
     public static bool LastRunWon { get; private set; }
-    public static bool LastRunNewBest { get; private set; }  // read by ResultScreen
+    public static bool LastRunNewBest { get; private set; }
     float _startZ;
 
     void OnEnable() => LifecycleGuard.PausedChanged += OnPausedChanged;
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
         SetState(State.Playing);
         _startTime = Time.time;
         s_attempt++;
+        var audio = AudioService.Instance;
+        if (audio) audio.RunStart();
         Telemetry.Log("level_start", ("level_id", LevelId), ("attempt", s_attempt),
             ("coins", Wallet.Instance ? Wallet.Instance.Coins : 0));
     }
@@ -86,7 +88,7 @@ public class GameManager : MonoBehaviour
             await Awaitable.WaitForSecondsAsync(resultDelay, ct);
             _ = SceneLoader.Instance.Load("Result", Application.exitCancellationToken);
         }
-        catch (OperationCanceledException) { Debug.Log("Result scene load canceled."); }
+        catch (OperationCanceledException) { DevLog.Log("Result scene load canceled."); }
     }
     void SetState(State s) { Current = s; StateChanged?.Invoke(s); }
 }

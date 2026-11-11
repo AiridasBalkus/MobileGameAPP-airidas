@@ -5,14 +5,15 @@ public class Bootstrap : MonoBehaviour
 {
     void Awake()
     {
-        Application.targetFrameRate = 60;
+        DeviceTier.Apply(); // tier must be set before session_start
         string guid = Application.buildGUID;
         string build = guid.Length >= 8 ? guid.Substring(0, 8) : guid;
         Telemetry.Log("session_start",
             ("version", Application.version),
             ("build", build),
             ("device", SystemInfo.deviceModel),
-            ("android", SystemInfo.operatingSystem));
+            ("android", SystemInfo.operatingSystem),
+            ("tier", DeviceTier.CurrentName));
 
         QualitySettings.vSyncCount = 0;
         Screen.sleepTimeout = SleepTimeout.NeverSleep;

@@ -5,9 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// First-run hint on the Game HUD (Week 5 playtest: testers did not know to swipe or collect coins).
-// Builds itself when the Game scene loads, inside Canvas/SafeArea, so no scene wiring is needed.
-// Shown for the player's first RunsToShow completed runs (PlayerPrefs "hint_runs").
+// Swipe / coin hint for the first 3 runs
 public class OnboardingHint : MonoBehaviour
 {
     const string GameScene = "Game";
@@ -15,7 +13,7 @@ public class OnboardingHint : MonoBehaviour
     const int RunsToShow = 3;
     const string SwipeText = "Swipe left / right to change lanes";
     const string CoinsText = "Collect coins to upgrade";
-    const float SwipeHintMax = 8f;   // seconds before moving on even without a swipe
+    const float SwipeHintMax = 8f;
     const float CoinsHintTime = 2.5f;
     const float FadeTime = 0.4f;
 
@@ -30,7 +28,6 @@ public class OnboardingHint : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        // Covers pressing Play with the Game scene open in the Editor.
         var active = SceneManager.GetActiveScene();
         if (active.name == GameScene) TryCreate(active);
     }
@@ -54,14 +51,13 @@ public class OnboardingHint : MonoBehaviour
         }
         if (!safeArea) { Debug.LogWarning("[Hint] Canvas/SafeArea not found"); return; }
 
-        // Panel: centred band just above the middle of the safe area, never blocks touches.
         var go = new GameObject("OnboardingHint", typeof(RectTransform), typeof(CanvasGroup), typeof(Image));
         var rt = (RectTransform)go.transform;
         rt.SetParent(safeArea, false);
         rt.anchorMin = new Vector2(0.08f, 0.60f);
         rt.anchorMax = new Vector2(0.92f, 0.68f);
         rt.offsetMin = Vector2.zero; rt.offsetMax = Vector2.zero;
-        // Sit under the pause panel so pausing covers the hint.
+        // under the pause panel
         var pausePanel = safeArea.Find("PausePanel");
         if (pausePanel) rt.SetSiblingIndex(pausePanel.GetSiblingIndex());
 
@@ -114,7 +110,6 @@ public class OnboardingHint : MonoBehaviour
         if (_group) _group.alpha = 0f;
     }
 
-    // Scaled time throughout, so the hint holds while the game is paused.
     async Awaitable RunAsync(CancellationToken ct)
     {
         try
@@ -137,7 +132,7 @@ public class OnboardingHint : MonoBehaviour
                 await Awaitable.NextFrameAsync(ct);
             }
             _group.alpha = 0f;
-            gameObject.SetActive(false); // stays alive (and subscribed) to count the run at the end
+            gameObject.SetActive(false);
         }
         catch (OperationCanceledException) { }
         catch (Exception e) { Debug.LogException(e); }

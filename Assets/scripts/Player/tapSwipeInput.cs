@@ -14,7 +14,7 @@ public class tapSwipeInput : MonoBehaviour
 
     public LaneRunner runner;
 
-    //This is reused for UI hit tests so a swipe that starts on a HUD button is not read as lane input.
+    // so swipes starting on a button are ignored
     static readonly List<RaycastResult> s_hits = new List<RaycastResult>(8);
     PointerEventData _pointer;
     EventSystem _pointerOwner;
@@ -50,7 +50,6 @@ public class tapSwipeInput : MonoBehaviour
         }
     }
 
-    // True if the touch began on an interactable button/toggle (Pause, Upgrade...).
     bool StartedOnButton(Vector2 screenPos)
     {
         var es = EventSystem.current;

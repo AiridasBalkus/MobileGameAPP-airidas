@@ -16,7 +16,7 @@ public class CoinShop : MonoBehaviour
             if (await store.PurchaseAsync("coins_500") && Wallet.Instance)
             {
                 Wallet.Instance.Earn(500);
-                Debug.Log($"[iap-stub] granted 500, coins now {Wallet.Instance.Coins}");
+                DevLog.Log($"[iap-stub] granted 500, coins now {Wallet.Instance.Coins}");
             }
         }
         finally

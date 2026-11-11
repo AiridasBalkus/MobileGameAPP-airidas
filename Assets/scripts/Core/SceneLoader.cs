@@ -20,7 +20,7 @@ public class SceneLoader : MonoBehaviour
     }
     public async Awaitable Load(string scene, CancellationToken ct)
     {
-        Debug.Log($"[Loader] Load({scene}) called, IsLoading={IsLoading}");
+        DevLog.Log($"[Loader] Load({scene}) called, IsLoading={IsLoading}");
         if (IsLoading) return;
         IsLoading = true;
         var stopwatch = Stopwatch.StartNew();

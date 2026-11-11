@@ -14,7 +14,7 @@ public class LaneRunner : MonoBehaviour
     float _targetXPosition;
     float _speed;
     public float Speed => _speed;
-    public static event System.Action<int> LaneChanged; // direction -1 / +1, for the onboarding hint
+    public static event System.Action<int> LaneChanged;
 
     void Start()
     {

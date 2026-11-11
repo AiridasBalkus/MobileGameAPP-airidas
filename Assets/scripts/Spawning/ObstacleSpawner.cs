@@ -18,7 +18,7 @@ public class ObstacleSpawner : MonoBehaviour
     const int Single = 0, PickupLine = 1, Wall = 2, Zigzag = 3, Corridor = 4;
     CancellationTokenSource _cts;
     float _nextChunkZ;
-    bool _first; // KI-01: the first chunk of a run must leave the start (middle) lane clear
+    bool _first; // first chunk keeps the middle lane clear (KI-01)
 
 
     void OnEnable()
@@ -39,7 +39,6 @@ public class ObstacleSpawner : MonoBehaviour
                 // Fill the track up to spawnAhead in front of the player
                 while (_nextChunkZ <= player.position.z + spawnAheadDistanceZ && _nextChunkZ < stopSpawningAfterZ)
                 {
-                    // First chunk: coins in the middle lane, so its block always goes to a side lane
                     int type = _first ? PickupLine : PickType(_nextChunkZ);
                     int lane = _first ? 0 : UnityEngine.Random.Range(-1, 2);
                     _first = false;

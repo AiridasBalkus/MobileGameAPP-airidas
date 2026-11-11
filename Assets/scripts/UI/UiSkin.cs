@@ -4,19 +4,16 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// Applies the underwater UI sprites (Resources/MinoUW/UI) to every scene as it loads.
-// Runs once per scene load, never per frame. No Inspector wiring.
+// Underwater UI sprites, applied on each scene load
 public static class UiSkin
 {
     const string SpritePath = "MinoUW/UI/";
-    const float ButtonBorder = 48f, PanelBorder = 60f;   // sprite 9-slice borders (px)
+    const float ButtonBorder = 48f, PanelBorder = 60f;
     static readonly Color32 PrimaryText = new Color32(0x3A, 0x1E, 0x05, 0xFF);
 
-    // Main action per screen, matched by GameObject name (+ parent for Resume).
     static readonly string[] PrimaryNames = { "Play", "Retry" };
     const string PauseResumeParent = "PausePanel";
 
-    // Panels, as paths from a root object: Game pause/settings, Menu About, Result panel, Boot loading screen.
     static readonly string[] PanelPaths =
     {
         "Canvas/SafeArea/PausePanel",
@@ -29,6 +26,10 @@ public static class UiSkin
     static Sprite s_primary, s_secondary, s_panel, s_logo, s_coin;
     static readonly List<Button> s_buttons = new List<Button>(32);
     static readonly List<TMP_Text> s_texts = new List<TMP_Text>(4);
+    static readonly List<Selectable> s_selectables = new List<Selectable>(32);
+    static readonly Vector2 PrimaryMinSize = new Vector2(360f, 100f);
+    const float PrimaryMinFont = 46f;
+    const float MinTouchDp = 48f;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Init()
@@ -40,7 +41,7 @@ public static class UiSkin
         s_coin = Load("UI_Icon_Coin");
         SceneManager.sceneLoaded -= OnSceneLoaded;
         SceneManager.sceneLoaded += OnSceneLoaded;
-        Apply(SceneManager.GetActiveScene());   // Boot (already loaded when this runs)
+        Apply(SceneManager.GetActiveScene());
     }
 
     static Sprite Load(string name)
@@ -59,11 +60,17 @@ public static class UiSkin
             root.GetComponentsInChildren(true, s_buttons);
             for (int i = 0; i < s_buttons.Count; i++) SkinButton(s_buttons[i]);
 
+            root.GetComponentsInChildren(true, s_selectables);
+            for (int i = 0; i < s_selectables.Count; i++) EnsureTouchTarget(s_selectables[i]);
+            s_selectables.Clear();
+
             for (int i = 0; i < PanelPaths.Length; i++) SkinPanel(Find(root, PanelPaths[i]));
             if (scene.name == ResultScene)
             {
                 SkinPanel(Find(root, ResultPanelPath));
-                LightenDarkLabels(root);   // Score/Best/Title were black on the old light background
+                LightenDarkLabels(root); // dark text on the dark panel
+                var buy = root.transform.Find("SafeArea/BuyCoinsButton") as RectTransform;
+                if (buy) buy.anchoredPosition += new Vector2(0f, -30f); // room for the bigger Retry
             }
 
             if (root.name == "Canvas")
@@ -75,7 +82,6 @@ public static class UiSkin
         s_buttons.Clear();
     }
 
-    // "Canvas/SafeArea/X" -> the root must be named Canvas, then Find the rest.
     static Transform Find(GameObject root, string path)
     {
         int slash = path.IndexOf('/');
@@ -99,11 +105,41 @@ public static class UiSkin
         img.sprite = sprite;
         img.type = Image.Type.Sliced;
         img.color = Color.white;
+        if (primary) img.rectTransform.sizeDelta = Vector2.Max(img.rectTransform.sizeDelta, PrimaryMinSize);
         img.pixelsPerUnitMultiplier = FitBorder(img.rectTransform, ButtonBorder);
 
         b.GetComponentsInChildren(true, s_texts);
-        for (int i = 0; i < s_texts.Count; i++) s_texts[i].color = primary ? (Color)PrimaryText : Color.white;
+        for (int i = 0; i < s_texts.Count; i++)
+        {
+            s_texts[i].color = primary ? (Color)PrimaryText : Color.white;
+            if (primary) s_texts[i].fontSize = Mathf.Max(s_texts[i].fontSize, PrimaryMinFont);
+        }
         s_texts.Clear();
+    }
+
+    // invisible hit pad so buttons and toggles are at least 48 dp, without changing the layout
+    static void EnsureTouchTarget(Selectable sel)
+    {
+        if (!(sel is Button) && !(sel is Toggle)) return;
+        if (sel.GetComponentInParent<ScrollRect>(true) || sel.transform.Find("HitPad")) return;
+        var canvas = sel.GetComponentInParent<Canvas>(true);
+        if (!canvas) return;
+        float scale = canvas.rootCanvas.scaleFactor > 0f ? canvas.rootCanvas.scaleFactor : 1f;
+        float minUnits = MinTouchDp * Mathf.Max(Screen.dpi, 160f) / 160f / scale;
+
+        var rt = (RectTransform)sel.transform;
+        Vector2 size = rt.rect.size;
+        if (size.x >= minUnits && size.y >= minUnits) return;
+
+        var go = new GameObject("HitPad", typeof(RectTransform), typeof(Image));
+        var pad = (RectTransform)go.transform;
+        pad.SetParent(rt, false);
+        pad.SetAsFirstSibling();
+        pad.anchorMin = pad.anchorMax = new Vector2(0.5f, 0.5f);
+        pad.sizeDelta = new Vector2(Mathf.Max(size.x, minUnits), Mathf.Max(size.y, minUnits));
+        var img = go.GetComponent<Image>();
+        img.color = Color.clear;
+        img.canvasRenderer.cullTransparentMesh = true;
     }
 
     static void SkinPanel(Transform t)
@@ -117,7 +153,6 @@ public static class UiSkin
         img.pixelsPerUnitMultiplier = FitBorder(img.rectTransform, PanelBorder);
     }
 
-    // Non-button labels that are dark become white so they read on the dark UI_Panel.
     static void LightenDarkLabels(GameObject root)
     {
         root.GetComponentsInChildren(true, s_texts);
@@ -131,7 +166,6 @@ public static class UiSkin
         s_texts.Clear();
     }
 
-    // Keeps each 9-slice border at most a third of the element's short side.
     static float FitBorder(RectTransform rt, float border)
     {
         var r = rt.rect;
@@ -139,7 +173,6 @@ public static class UiSkin
         return shortSide > 0f ? Mathf.Max(1f, 3f * border / shortSide) : 1f;
     }
 
-    // Menu: hide the "Mino" title text and show the logo in its place (top centre).
     static void AddLogo(Transform title, string sceneName)
     {
         if (sceneName != "Menu" || !title || !s_logo || title.parent.Find("Logo")) return;
@@ -153,7 +186,7 @@ public static class UiSkin
         rt.anchorMin = rt.anchorMax = new Vector2(0.5f, 1f);
         rt.pivot = new Vector2(0.5f, 1f);
         rt.anchoredPosition = new Vector2(0f, -40f);
-        float width = 520f;                                // Menu canvas is 800 units wide
+        float width = 520f;
         float aspect = s_logo.rect.width / Mathf.Max(1f, s_logo.rect.height);
         rt.sizeDelta = new Vector2(width, width / aspect);
         var img = go.GetComponent<Image>();
@@ -162,7 +195,6 @@ public static class UiSkin
         img.raycastTarget = false;
     }
 
-    // Game HUD: coin icon just left of the coin number (number left-aligned so it sits next to it).
     static void AddCoinIcon(Transform coins)
     {
         if (!coins || !s_coin || coins.Find("CoinIcon")) return;

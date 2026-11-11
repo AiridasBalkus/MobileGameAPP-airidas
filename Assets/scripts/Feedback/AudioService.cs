@@ -5,11 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-// The single audio path (W09, replaces the Week 5 generated click in Feedback).
-// Created before the first scene loads and kept with DontDestroyOnLoad; clips come from
-// Resources/MinoUW/Audio so nothing needs Inspector wiring.
-// Pause: gameplay sources obey AudioListener.pause (set by LifecycleGuard), so music and SFX
-// stay silent while paused. Only the UI click source ignores it, so Resume/Settings still click.
+// All game audio, clips loaded from Resources/MinoUW/Audio
 public class AudioService : MonoBehaviour
 {
     const string SoundKey = "sound";
@@ -25,7 +21,7 @@ public class AudioService : MonoBehaviour
         set { PlayerPrefs.SetInt(SoundKey, value ? 1 : 0); PlayerPrefs.Save(); ApplyVolume(); }
     }
 
-    AudioClip _swipe, _coin, _hit, _click, _newBest, _music;
+    AudioClip _swipe, _coin, _hit, _click, _newBest, _music, _upgrade, _runStart;
     AudioSource _musicSource, _uiSource;
     readonly AudioSource[] _pool = new AudioSource[PoolSize];
     int _next;
@@ -52,6 +48,8 @@ public class AudioService : MonoBehaviour
         _click = Load("SFX_Click");
         _newBest = Load("SFX_NewBest");
         _music = Load("MUS_Underwater_Loop");
+        _upgrade = Load("SFX_Upgrade");
+        _runStart = Load("SFX_RunStart");
 
         _musicSource = NewSource();
         _musicSource.clip = _music;
@@ -92,11 +90,12 @@ public class AudioService : MonoBehaviour
 
     static void ApplyVolume() => AudioListener.volume = SoundOn ? 1f : 0f;
 
-    // ---- events ----
     public void Swipe() => Play(_swipe, 0.6f, true);
     public void Coin() => Play(_coin, 0.8f, true);
     public void Hit() => Play(_hit, 1f, false);
     public void NewBest() => Play(_newBest, 1f, false);
+    public void Upgrade() => Play(_upgrade, 0.8f, false);
+    public void RunStart() => Play(_runStart, 0.7f, false);
     public void Click() { if (_click) _uiSource.PlayOneShot(_click, 0.6f); }
 
     void Play(AudioClip clip, float volume, bool varyPitch)
@@ -108,7 +107,6 @@ public class AudioService : MonoBehaviour
         s.PlayOneShot(clip, volume);
     }
 
-    // ---- per scene: click on every Button, Sound toggle in Game settings ----
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         foreach (var root in scene.GetRootGameObjects())
@@ -116,7 +114,7 @@ public class AudioService : MonoBehaviour
             root.GetComponentsInChildren(true, _buttons);
             for (int i = 0; i < _buttons.Count; i++)
             {
-                _buttons[i].onClick.RemoveListener(_onClick); // never double-subscribe
+                _buttons[i].onClick.RemoveListener(_onClick);
                 _buttons[i].onClick.AddListener(_onClick);
             }
             if (root.name == "Canvas") AddSoundToggle(root.transform);
@@ -124,7 +122,7 @@ public class AudioService : MonoBehaviour
         _buttons.Clear();
     }
 
-    // Clones the Haptics toggle in Game > SettingsPanel and places it just above it.
+    // Sound toggle is a copy of the haptics toggle
     static void AddSoundToggle(Transform canvas)
     {
         var haptics = canvas.Find("SafeArea/SettingsPanel/Toggle");
@@ -133,7 +131,7 @@ public class AudioService : MonoBehaviour
         var clone = Instantiate(haptics.gameObject, haptics.parent);
         clone.name = "SoundToggle";
         var old = clone.GetComponent<HapticsToggle>();
-        if (old) DestroyImmediate(old);   // must not write the haptics pref
+        if (old) DestroyImmediate(old);
         clone.AddComponent<SoundToggle>();
 
         var rt = (RectTransform)clone.transform;

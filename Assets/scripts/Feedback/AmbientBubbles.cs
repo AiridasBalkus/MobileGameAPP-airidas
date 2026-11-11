@@ -2,16 +2,14 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
-// Slow rising bubbles in the Game scene (underwater art pass). Built in code on the main camera
-// when Game loads, so no prefab or Inspector work. World-space simulation, max 80 particles.
-// The HUD canvases are Screen Space Overlay, so particles can never draw over them.
-// Skipped on the Low quality tier.
+// Ambient bubbles in the Game scene, skipped on Low tier
 public static class AmbientBubbles
 {
     const string GameScene = "Game";
-    const string BubbleTex = "MinoUW/UI/T_Bubble";
+    const string BubbleTex = "MinoUW/FX/FX_Bubble";
+    const string BubbleTexOld = "MinoUW/UI/T_Bubble";
     const string UrpParticles = "Universal Render Pipeline/Particles/Unlit";
-    static Material s_mat;   // one material for the whole session
+    static Material s_mat;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Hook()
@@ -27,16 +25,9 @@ public static class AmbientBubbles
         if (scene.name == GameScene) Create();
     }
 
-    public static bool IsLowTier()
-    {
-        int q = QualitySettings.GetQualityLevel();
-        var names = QualitySettings.names;
-        return q >= 0 && q < names.Length && names[q] == "Low";
-    }
-
     static void Create()
     {
-        if (IsLowTier()) return;
+        if (DeviceTier.IsLow) return;
         var cam = Camera.main;
         if (!cam || cam.transform.Find("AmbientBubbles")) return;
         var mat = GetMaterial();
@@ -44,10 +35,10 @@ public static class AmbientBubbles
 
         var go = new GameObject("AmbientBubbles");
         go.transform.SetParent(cam.transform, false);
-        go.transform.localPosition = new Vector3(0f, 0f, 16f);   // box spans ~3 to ~29 m ahead
+        go.transform.localPosition = new Vector3(0f, 0f, 16f);
 
         var ps = go.AddComponent<ParticleSystem>();
-        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); // required before setting duration
+        ps.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear); // must stop before setting duration
 
         var main = ps.main;
         main.duration = 5f;
@@ -67,7 +58,7 @@ public static class AmbientBubbles
         shape.shapeType = ParticleSystemShapeType.Box;
         shape.scale = new Vector3(14f, 8f, 26f);
 
-        var vel = ps.velocityOverLifetime;   // all three axes must use the same curve mode
+        var vel = ps.velocityOverLifetime; // all axes need the same curve mode
         vel.enabled = true;
         vel.space = ParticleSystemSimulationSpace.World;
         vel.x = new ParticleSystem.MinMaxCurve(-0.1f, 0.1f);
@@ -87,12 +78,13 @@ public static class AmbientBubbles
     {
         if (s_mat) return s_mat;
         var tex = Resources.Load<Texture2D>(BubbleTex);
+        if (!tex) tex = Resources.Load<Texture2D>(BubbleTexOld);
         if (!tex) { Debug.LogWarning("[Bubbles] missing Resources/" + BubbleTex); return null; }
 
         var shader = Shader.Find(UrpParticles);
         if (shader)
         {
-            // URP Particles/Unlit set up as Transparent + Alpha blend (what the material inspector does)
+            // transparent, alpha blend
             s_mat = new Material(shader) { name = "M_Bubble_Runtime" };
             s_mat.SetTexture("_BaseMap", tex);
             s_mat.SetFloat("_Surface", 1f);
@@ -108,7 +100,7 @@ public static class AmbientBubbles
         }
         else
         {
-            // Not in the build (no material references it): fall back to the always-included sprite shader.
+            // shader not in build
             shader = Shader.Find("Sprites/Default");
             if (!shader) { Debug.LogWarning("[Bubbles] no particle shader in build"); return null; }
             Debug.LogWarning("[Bubbles] " + UrpParticles + " not in build, using Sprites/Default. Add it to Always Included Shaders.");
