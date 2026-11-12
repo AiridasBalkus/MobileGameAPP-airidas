@@ -12,18 +12,29 @@ public class Feedback : MonoBehaviour
     const float FlashAlpha = 0.45f;
     Vector3 _camHome;
     Image _flash;
+    BurstFx _sparkle, _sandPuff;
     void Awake()
     {
         _camHome = cameraTransform.localPosition;
     }
 
-    void Start() => _flash = CreateFlash();
+    void Start()
+    {
+        _flash = CreateFlash();
+        _sparkle = BurstFx.Create("FX_Sparkle", 12, 0.35f, 3f, 0.5f, new Color(1f, 0.9f, 0.4f), 0f);
+        _sandPuff = BurstFx.Create("FX_SandPuff", 10, 1.2f, 2f, 0.8f, new Color(0.9f, 0.85f, 0.7f, 0.8f), 0.3f);
+    }
 
     public void LaneChange() { var a = AudioService.Instance; if (a) a.Swipe(); }
-    public void Pickup() { var a = AudioService.Instance; if (a) a.Coin(); }
+    public void Pickup()
+    {
+        var a = AudioService.Instance; if (a) a.Coin();
+        _sparkle?.Play(transform.position + Vector3.up * 0.5f);
+    }
     public void Hit()
     {
         var a = AudioService.Instance; if (a) a.Hit();
+        _sandPuff?.Play(transform.position + Vector3.forward * 0.5f);
         _ = ShakeAsync(destroyCancellationToken);
     }
 

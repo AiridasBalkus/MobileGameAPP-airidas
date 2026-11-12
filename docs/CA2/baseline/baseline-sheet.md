@@ -56,3 +56,22 @@
 | Warm start TotalTime (Android: HOT, 3 runs) | 77 / 31 / 34 ms, median 34 ms |
 | Time to interactive (Menu, [perf] interactive) | 2.24-2.33 s, median ~2.29 s (mostly Unity splash). Budget < 5 s: pass |
 | TOTAL PSS after ~5 min play | 325,924 KB (~318 MB); RSS 442,916 KB; swap PSS 75 KB. Budget < 600 MB: pass. Not comparable with row 1 (OPPO, 176.6 MB) |
+
+| Field | Row 6 (Week 9 Lab A, art pass and device tiers) |
+|-------|-------------------------------------------------|
+| Date, build | 12 Nov 2026, v0.9.0 / 6, build d573bf52, Development Build |
+| Device, tier | Samsung Galaxy S24 Ultra (SM-S928U1), Android 17; DeviceTier = High (11084 MB, 8 cores), URP-High, 4x MSAA, render scale 1.0 |
+| Frame time: mean / p99 (ms) | 16.64 / 19.00 (p95 18.10, max 27.99, 8 of 2000 frames > 20 ms); w09-frameTime.csv |
+| vs Week 7 (S24, before art) | 16.64 / 18.72: art pass (fog, ~400 static props, particles, audio, shadows, 4x MSAA) costs ~0.4 ms real work (5.4 -> 5.8 ms) and +0.3 ms p99; still 60 fps with ~10 ms headroom |
+| Rendering (gameplay frame) | 32 SetPass, 29.1k triangles, draw calls n/a (SRP Batcher), 20 RT changes. Week 3 (OPPO, greybox): 23-25 SetPass, 6.1k triangles; increase is the scenery props and the shadow pass |
+| GC per frame | 99 B median (Input System + overlay), unchanged |
+
+| Category | Budget (MB) | Measured (MB) | Inside? |
+|----------|-------------|---------------|---------|
+| Textures (Texture2D incl. atlases) | 100 | 5.9 (High) / 4.1 (Low) | Yes (ASTC 6x6 / 4x4) |
+| Render targets (RenderTexture) | 64 | High: 134.8 -> 113.9 after HDR off; Low: 11.2 | High: **No**, named offender = 4x MSAA at 1080x2340. HDR off saved 20.9 MB; next: MSAA 2x on URP-High before CA3. Low/Mid: Yes |
+| Audio (AudioClip + AudioManager) | 20 | ~1.3 + under 1.0 | Yes (music streamed) |
+| Managed heap | 32 | 26.0-29.2 | Yes |
+| Total PSS (dumpsys meminfo, 60 s play) | 600 | 367.5 tier High; Week 8: 318 | Yes |
+
+Note: Memory Profiler "Total Resident" varied 284-397 MB between captures and the Low capture moved ~170 MB into "Untracked" (Vulkan driver memory it can't attribute), so PSS from dumpsys is used for the total.

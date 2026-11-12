@@ -160,3 +160,18 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Peer 2 (10 min, low-tier): mid scores (3-4) across the board, no comments.
 - Form fixes: Likert options exported as "Option 1-5" (renamed to 1-5); "Control responsiveness" split into two statements by mistake.
 - Pack 3 needs 10+ testers by Sun 29 Nov; 2 so far.
+
+11 Nov 2026: Week 9 Lab A + showcase fixes
+- Branch w09-showcase. Code changes made with Claude Code, reviewed by me; nothing below is verified on device yet (0.9.0 not built).
+- KI-01 fix: first chunk of every run is a PickupLine with coins in the middle lane, block in a side lane. Evidence: KnownIssues KI-01, level_fail at 19 m / 3.8 s and 25 m / 4.9 s (Weeks 6-8).
+- KI-03 (new): "Pause doesn't pause" (survey response 1, S25 FE). The HUD Pause button only showed the panel and never called LifecycleGuard.SetPaused(true), so timeScale stayed 1. The test plan missed it because it only tested Home/Back pause. Fixed by wiring the button at runtime; swipes that start on a button are ignored.
+- Upgrade label now says what it does ("Faster lane change  Lv N / cost coins") and dims when unaffordable. Evidence: survey response 1, "what does upgrade do?".
+- Start speed 5 -> 7.5, acceleration 0.05 -> 0.2 (top speed 12 reached in ~22 s instead of ~140 s); second chunk still arrives after ~5.7 s. Evidence: survey response 1, "Run faster", Control 1, One more go 1.
+- Onboarding hint ("Swipe left / right", then "Collect coins to upgrade") for the first 3 runs. Evidence: Week 5 playtest, testers didn't know to swipe or collect coins.
+- KI-02 fix: distance score lifted 48 dp above the safe area. Evidence: test plan scenario 3 note, screens/02-no-network.jpg.
+- About screen: blank line before "Feedback:" (builds.md 0.8.0 known cosmetic issue).
+- DeviceTier: Low / Mid / High from RAM and cores, thresholds 7000 / 3500 MB instead of the lab's 8192 / 4096 because phones report less than nominal RAM (S24 Ultra 11084, S25 FE 7204, A15 3638 MB). Tier override in Settings (applies next launch); session_start now logs tier. Low stays at 30 fps unless High FPS is chosen. See docs/CA2/quality-tiers.md.
+- Underwater art pass: one AudioService (music, swipe/coin/hit/click/new best/upgrade/run start, Sound toggle) replacing the Week 5 generated click; UI sprites, logo, coin icon; ambient bubbles skipped on Low tier.
+- Polish: coin bob/spin, coin counter pop with "+5", red hit flash, "New best!" on Result, bigger Play/Retry/Resume, 48 dp touch targets.
+- Release logs: [Baseline], [Loader], [Wallet], [AP], [iap-stub], [Probe] now only in Editor/Development builds (Week 7: GC ~99 B/frame from Debug.Log spam). [telemetry], [perf], build= and [Pause] kept.
+- Next: Editor steps (Quality levels Low/Mid/High and URP assets, tier dropdown, Always Included particle shader), build 0.9.0 / versionCode 6, re-run the pause test x10 with the HUD button, measure Week 9 memory budget.

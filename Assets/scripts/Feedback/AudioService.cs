@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -12,6 +11,7 @@ public class AudioService : MonoBehaviour
     const string ClipPath = "MinoUW/Audio/";
     const int PoolSize = 4;
     const float MusicVolume = 0.35f;
+    const float AmbienceVolume = 0.2f;
 
     public static AudioService Instance { get; private set; }
 
@@ -21,8 +21,8 @@ public class AudioService : MonoBehaviour
         set { PlayerPrefs.SetInt(SoundKey, value ? 1 : 0); PlayerPrefs.Save(); ApplyVolume(); }
     }
 
-    AudioClip _swipe, _coin, _hit, _click, _newBest, _music, _upgrade, _runStart;
-    AudioSource _musicSource, _uiSource;
+    AudioClip _swipe, _coin, _hit, _click, _newBest, _music, _ambience, _upgrade, _runStart;
+    AudioSource _musicSource, _ambienceSource, _uiSource;
     readonly AudioSource[] _pool = new AudioSource[PoolSize];
     int _next;
     UnityAction _onClick;
@@ -48,6 +48,7 @@ public class AudioService : MonoBehaviour
         _click = Load("SFX_Click");
         _newBest = Load("SFX_NewBest");
         _music = Load("MUS_Underwater_Loop");
+        _ambience = Load("AMB_Underwater_Loop");
         _upgrade = Load("SFX_Upgrade");
         _runStart = Load("SFX_RunStart");
 
@@ -55,6 +56,10 @@ public class AudioService : MonoBehaviour
         _musicSource.clip = _music;
         _musicSource.loop = true;
         _musicSource.volume = MusicVolume;
+        _ambienceSource = NewSource();
+        _ambienceSource.clip = _ambience;
+        _ambienceSource.loop = true;
+        _ambienceSource.volume = AmbienceVolume;
         for (int i = 0; i < PoolSize; i++) _pool[i] = NewSource();
         _uiSource = NewSource();
         _uiSource.ignoreListenerPause = true;
@@ -64,7 +69,11 @@ public class AudioService : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    void Start() { if (_music) _musicSource.Play(); }
+    void Start()
+    {
+        if (_music) _musicSource.Play();
+        if (_ambience) _ambienceSource.Play();
+    }
 
     void OnDestroy()
     {
@@ -117,27 +126,7 @@ public class AudioService : MonoBehaviour
                 _buttons[i].onClick.RemoveListener(_onClick);
                 _buttons[i].onClick.AddListener(_onClick);
             }
-            if (root.name == "Canvas") AddSoundToggle(root.transform);
         }
         _buttons.Clear();
-    }
-
-    // Sound toggle is a copy of the haptics toggle
-    static void AddSoundToggle(Transform canvas)
-    {
-        var haptics = canvas.Find("SafeArea/SettingsPanel/Toggle");
-        if (!haptics || haptics.parent.Find("SoundToggle")) return;
-
-        var clone = Instantiate(haptics.gameObject, haptics.parent);
-        clone.name = "SoundToggle";
-        var old = clone.GetComponent<HapticsToggle>();
-        if (old) DestroyImmediate(old);
-        clone.AddComponent<SoundToggle>();
-
-        var rt = (RectTransform)clone.transform;
-        var src = (RectTransform)haptics;
-        rt.anchoredPosition = src.anchoredPosition + new Vector2(0f, src.rect.height + 40f);
-        var label = clone.GetComponentInChildren<TMP_Text>(true);
-        if (label) label.SetText("Sound");
     }
 }

@@ -7,7 +7,6 @@ public static class AmbientBubbles
 {
     const string GameScene = "Game";
     const string BubbleTex = "MinoUW/FX/FX_Bubble";
-    const string BubbleTexOld = "MinoUW/UI/T_Bubble";
     const string UrpParticles = "Universal Render Pipeline/Particles/Unlit";
     static Material s_mat;
 
@@ -78,34 +77,35 @@ public static class AmbientBubbles
     {
         if (s_mat) return s_mat;
         var tex = Resources.Load<Texture2D>(BubbleTex);
-        if (!tex) tex = Resources.Load<Texture2D>(BubbleTexOld);
         if (!tex) { Debug.LogWarning("[Bubbles] missing Resources/" + BubbleTex); return null; }
+        s_mat = CreateParticleMaterial(tex);
+        return s_mat;
+    }
 
+    // URP Particles/Unlit, transparent alpha blend; also used by the pickup and hit bursts
+    public static Material CreateParticleMaterial(Texture2D tex)
+    {
         var shader = Shader.Find(UrpParticles);
-        if (shader)
-        {
-            // transparent, alpha blend
-            s_mat = new Material(shader) { name = "M_Bubble_Runtime" };
-            s_mat.SetTexture("_BaseMap", tex);
-            s_mat.SetFloat("_Surface", 1f);
-            s_mat.SetFloat("_Blend", 0f);
-            s_mat.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
-            s_mat.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
-            s_mat.SetFloat("_SrcBlendAlpha", (float)BlendMode.One);
-            s_mat.SetFloat("_DstBlendAlpha", (float)BlendMode.OneMinusSrcAlpha);
-            s_mat.SetFloat("_ZWrite", 0f);
-            s_mat.SetOverrideTag("RenderType", "Transparent");
-            s_mat.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
-            s_mat.renderQueue = (int)RenderQueue.Transparent;
-        }
-        else
+        if (!shader)
         {
             // shader not in build
+            Debug.LogWarning("[FX] " + UrpParticles + " not in build, using Sprites/Default. Add it to Always Included Shaders.");
             shader = Shader.Find("Sprites/Default");
-            if (!shader) { Debug.LogWarning("[Bubbles] no particle shader in build"); return null; }
-            Debug.LogWarning("[Bubbles] " + UrpParticles + " not in build, using Sprites/Default. Add it to Always Included Shaders.");
-            s_mat = new Material(shader) { name = "M_Bubble_Runtime", mainTexture = tex };
+            if (!shader) return null;
+            return new Material(shader) { name = tex.name + "_Runtime", mainTexture = tex };
         }
-        return s_mat;
+        var m = new Material(shader) { name = tex.name + "_Runtime" };
+        m.SetTexture("_BaseMap", tex);
+        m.SetFloat("_Surface", 1f);
+        m.SetFloat("_Blend", 0f);
+        m.SetFloat("_SrcBlend", (float)BlendMode.SrcAlpha);
+        m.SetFloat("_DstBlend", (float)BlendMode.OneMinusSrcAlpha);
+        m.SetFloat("_SrcBlendAlpha", (float)BlendMode.One);
+        m.SetFloat("_DstBlendAlpha", (float)BlendMode.OneMinusSrcAlpha);
+        m.SetFloat("_ZWrite", 0f);
+        m.SetOverrideTag("RenderType", "Transparent");
+        m.EnableKeyword("_SURFACE_TYPE_TRANSPARENT");
+        m.renderQueue = (int)RenderQueue.Transparent;
+        return m;
     }
 }

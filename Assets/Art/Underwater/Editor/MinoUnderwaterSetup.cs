@@ -13,7 +13,7 @@ public class MinoUnderwaterImport : AssetPostprocessor
         if (!assetPath.StartsWith(Root)) return;
         var ti = (TextureImporter)assetImporter;
         string file = System.IO.Path.GetFileNameWithoutExtension(assetPath);
-        bool isUi = assetPath.Contains("/UI/") && file != "T_Bubble";
+        bool isUi = (assetPath.StartsWith(Root + "UI/") || assetPath.StartsWith(Root + "Resources/MinoUW/UI/")) && file != "T_Bubble";
         bool isFx = assetPath.Contains("/FX/") || file == "T_Bubble";
         bool isCutout = file.StartsWith("S_");
         bool isSky = file.Contains("Panorama");

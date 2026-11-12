@@ -1,4 +1,7 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.SceneManagement;
 
 public class DeviceTier : MonoBehaviour
 {
@@ -16,7 +19,9 @@ public class DeviceTier : MonoBehaviour
     public static bool IsLow => Current == Low;
     public static bool IsOverridden { get; private set; }
     public static bool QualityApplied { get; private set; }
+    public static bool PostProcessing => Current != Low;
     static bool s_applied;
+    static readonly List<Camera> s_cams = new List<Camera>(4);
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     static void Init() => Apply();
@@ -38,8 +43,32 @@ public class DeviceTier : MonoBehaviour
         if (QualityApplied) QualitySettings.SetQualityLevel(level, true);
         else Debug.LogWarning($"[perf] quality level '{CurrentName}' not found, keeping '{QualitySettings.names[QualitySettings.GetQualityLevel()]}'");
 
+        // Low: no post-processing, also on cameras in later scenes
+        if (!PostProcessing)
+        {
+            foreach (var cam in FindObjectsByType<Camera>(FindObjectsInactive.Include)) DisablePost(cam);
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            SceneManager.sceneLoaded += OnSceneLoaded;
+        }
+
         Application.targetFrameRate = Current == Low ? 30 : 60;
-        Debug.Log($"[perf] tier={CurrentName} override={IsOverridden} ram={SystemInfo.systemMemorySize}MB cores={SystemInfo.processorCount} quality={QualitySettings.names[QualitySettings.GetQualityLevel()]}");
+        Debug.Log($"[perf] tier={CurrentName} override={IsOverridden} post={(PostProcessing ? "on" : "off")} ram={SystemInfo.systemMemorySize}MB cores={SystemInfo.processorCount} quality={QualitySettings.names[QualitySettings.GetQualityLevel()]}");
+    }
+
+    static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        foreach (var root in scene.GetRootGameObjects())
+        {
+            root.GetComponentsInChildren(true, s_cams);
+            for (int i = 0; i < s_cams.Count; i++) DisablePost(s_cams[i]);
+        }
+        s_cams.Clear();
+    }
+
+    static void DisablePost(Camera cam)
+    {
+        var data = cam.GetUniversalAdditionalCameraData();
+        if (data) data.renderPostProcessing = false;
     }
 
     static int Detect()
@@ -53,6 +82,6 @@ public class DeviceTier : MonoBehaviour
 
 #if UNITY_EDITOR
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    static void ResetStatics() { s_applied = false; Current = Mid; IsOverridden = false; QualityApplied = false; }
+    static void ResetStatics() { SceneManager.sceneLoaded -= OnSceneLoaded; s_applied = false; Current = Mid; IsOverridden = false; QualityApplied = false; }
 #endif
 }
