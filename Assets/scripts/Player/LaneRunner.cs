@@ -6,14 +6,15 @@ public class LaneRunner : MonoBehaviour
     public float laneWidth = 2.0f; // Width of each lane
     public int laneCount = 3;
     public float laneChangeSpeed = 12.0f; // Speed of lane change
-    public float startSpeed = 5f;
+    public float startSpeed = 7.5f;
     public float maxSpeed = 12f;
-    public float acceleration = 0.05f;
+    public float acceleration = 0.2f;
     public float upgradeBonus = 0.35f;   // +35% lane-change speed per level
     int _currentLane;
     float _targetXPosition;
     float _speed;
     public float Speed => _speed;
+    public static event System.Action<int> LaneChanged;
 
     void Start()
     {
@@ -42,6 +43,7 @@ public class LaneRunner : MonoBehaviour
         _currentLane = newLane;
         _targetXPosition = _currentLane * laneWidth;
         if (feedback) feedback.LaneChange();
+        LaneChanged?.Invoke(direction);
     }
 
 }

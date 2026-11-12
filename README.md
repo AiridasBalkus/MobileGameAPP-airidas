@@ -36,17 +36,18 @@ Release builds are signed with a private release keystore that is **not** stored
 2. **File > Build Profiles**: select **Android Release** (switch platform to Android if asked).
 3. Check **Edit > Project Settings > Player > Android > Other Settings**:
    - Package Name com.airidasbalkus.mino
-   - Version 0.2.0, Bundle Version Code 2
+   - Version 0.9.0, Bundle Version Code 6
    - Scripting Backend **IL2CPP**, Target Architectures **ARM64**
    - Minimum API Level 26, Target API Level Automatic (highest installed)
 4. **Publishing Settings**: select the release keystore (see Signing) and enter both passwords.
 5. In the build profile, Development Build **off**, Build App Bundle **off**.
-6. **Build** to releases/Mygame-0.2.0-arm64.apk.
+6. **Build** to releases/Mygame-0.9.0-arm64.apk.
 7. With the phone connected (USB debugging on):
-   `adb install -r releases/Mygame-0.2.0-arm64.apk`
-   `adb shell dumpsys package com.airidasbalkus.mino | findstr version` → expect `versionCode=2`, `versionName=0.2.0`.
+   `adb install -r releases/Mygame-0.9.0-arm64.apk`
+   `adb shell dumpsys package com.airidasbalkus.mino | findstr version` → expect `versionCode=6`, `versionName=0.9.0`.
 
 Earlier development builds (versionCodes 1–4) were sideloaded for testing only; v0.2.0 / versionCode 2 is the first tagged release. If a phone still has one of those installed, run `adb uninstall com.airidasbalkus.mino` first.
+
 
 ## Device targets
 - Minimum API: 26 (Android 8.0); target API: 36 (Automatic)
@@ -59,3 +60,4 @@ Claude (Anthropic) was used as a step-by-step guide through the lab sheets: expl
 - Week 6: I asked Claude to organise `Assets/scripts` into folders (Core, Player, Spawning, UI, Feedback, Debug, Economy). It moved the existing files with their `.meta` files; no script code was changed.
 - Week 7 Lab B: Claude guided the thermal soak step by step, calculated the p99 values from my Profile Analyzer CSV exports and summarised my logcat files
 - Week 8 Lab A: Claude guided the release build, build stamp, drafted the QA docs from my build outputs, which I reviewed and edited.
+- Week 9 Lab A + showcase: Claude wrote the device tier code, the underwater art/audio wiring and the UI skin bake tool, and drafted the Week 9 docs. I reviewed the code, did the Editor setup, builds and device tests myself.

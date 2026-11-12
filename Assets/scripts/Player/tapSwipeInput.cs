@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
+using UnityEngine.UI;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -11,6 +14,11 @@ public class tapSwipeInput : MonoBehaviour
 
     public LaneRunner runner;
 
+    // so swipes starting on a button are ignored
+    static readonly List<RaycastResult> s_hits = new List<RaycastResult>(8);
+    PointerEventData _pointer;
+    EventSystem _pointerOwner;
+
     void OnEnable() => EnhancedTouchSupport.Enable();
     void OnDisable() => EnhancedTouchSupport.Disable();
 
@@ -20,6 +28,7 @@ public class tapSwipeInput : MonoBehaviour
         foreach (var touch in Touch.activeTouches)
         {
             if (touch.phase != TouchPhase.Ended) continue;
+            if (StartedOnButton(touch.startScreenPosition)) continue;
             float px = swipeDp * Mathf.Max(Screen.dpi, 160f) / 160f;
             Vector2 d = touch.screenPosition - touch.startScreenPosition;
 
@@ -39,5 +48,21 @@ public class tapSwipeInput : MonoBehaviour
 
             }
         }
+    }
+
+    bool StartedOnButton(Vector2 screenPos)
+    {
+        var es = EventSystem.current;
+        if (es == null) return false;
+        if (_pointer == null || _pointerOwner != es) { _pointer = new PointerEventData(es); _pointerOwner = es; }
+        _pointer.position = screenPos;
+        s_hits.Clear();
+        es.RaycastAll(_pointer, s_hits);
+        for (int i = 0; i < s_hits.Count; i++)
+        {
+            var sel = s_hits[i].gameObject.GetComponentInParent<Selectable>();
+            if (sel != null && sel.IsInteractable()) return true;
+        }
+        return false;
     }
 }

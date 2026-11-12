@@ -16,8 +16,8 @@ public class BuildStamp : MonoBehaviour
             + $"{SystemInfo.deviceModel}\n"
             + $"{SystemInfo.operatingSystem}\n"
             + $"{SystemInfo.systemMemorySize} MB RAM  "
-            + $"{Screen.width}x{Screen.height} @ {hz:0} Hz"
-            + "Feedback: https://forms.cloud.microsoft/e/YYyjNvHK6G"; ;
+            + $"{Screen.width}x{Screen.height} @ {hz:0} Hz\n\n"
+            + "Feedback: https://forms.cloud.microsoft/e/YYyjNvHK6G";
         Debug.Log($"build={Application.version}/{id}");
     }
     public void OpenFeedbackForm() =>

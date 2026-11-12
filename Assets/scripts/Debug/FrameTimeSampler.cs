@@ -19,6 +19,6 @@ public class FrameTimeSampler : MonoBehaviour
         float sum = 0f;
         for (int k = 0; k < N; k++) sum += _sorted[k];
         float p99 = _sorted[Mathf.FloorToInt(0.99f * (N - 1))];
-        Debug.Log($"[Baseline] avg {sum / N:F2} ms  p99 {p99:F2} ms");
+        DevLog.Log($"[Baseline] avg {sum / N:F2} ms  p99 {p99:F2} ms");
     }
 }

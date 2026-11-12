@@ -10,7 +10,7 @@ public class WalletPersistence : MonoBehaviour
         wallet = GetComponent<Wallet>();
         WalletSave.Load(wallet);
         wallet.Changed += Save;
-        Debug.Log($"[Wallet] loaded {wallet.Coins} coins, level {wallet.Level}");
+        DevLog.Log($"[Wallet] loaded {wallet.Coins} coins, level {wallet.Level}");
     }
 
     void OnDestroy() { if (wallet) wallet.Changed -= Save; }
