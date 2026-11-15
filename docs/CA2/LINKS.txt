@@ -1,0 +1,2 @@
+Repository: https://github.com/AiridasBalkus/MobileGameAPP-airidas
+Release tag: v0.2-CA2

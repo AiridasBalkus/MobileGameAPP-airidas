@@ -1,6 +1,6 @@
 ### This the README for my mobile game MINO
 ## Device Info
-Device Model: Samsung Galaxy S24 Ultra (SM-S928U1), current test phone from Week 7 Lab B
+Device Model: Samsung Galaxy S24 Ultra (SM-S928U1)
 Android Version: Android OS 17 / API-37
 Graphics API: VULKAN
 Previous: OPPO Find X5 Pro (broken Week 5), Samsung Galaxy XCover Pro (Weeks 5 to 7 Lab A)
@@ -36,15 +36,15 @@ Release builds are signed with a private release keystore that is **not** stored
 2. **File > Build Profiles**: select **Android Release** (switch platform to Android if asked).
 3. Check **Edit > Project Settings > Player > Android > Other Settings**:
    - Package Name com.airidasbalkus.mino
-   - Version 0.9.0, Bundle Version Code 6
+   - Version 0.9.1, Bundle Version Code 7
    - Scripting Backend **IL2CPP**, Target Architectures **ARM64**
    - Minimum API Level 26, Target API Level Automatic (highest installed)
 4. **Publishing Settings**: select the release keystore (see Signing) and enter both passwords.
 5. In the build profile, Development Build **off**, Build App Bundle **off**.
-6. **Build** to releases/Mygame-0.9.0-arm64.apk.
+6. **Build** to releases/Mygame-0.9.1-arm64.apk.
 7. With the phone connected (USB debugging on):
-   `adb install -r releases/Mygame-0.9.0-arm64.apk`
-   `adb shell dumpsys package com.airidasbalkus.mino | findstr version` → expect `versionCode=6`, `versionName=0.9.0`.
+   `adb install -r releases/Mygame-0.9.1-arm64.apk`
+   `adb shell dumpsys package com.airidasbalkus.mino | findstr version` → expect `versionCode=7`, `versionName=0.9.1`.
 
 Earlier development builds (versionCodes 1–4) were sideloaded for testing only; v0.2.0 / versionCode 2 is the first tagged release. If a phone still has one of those installed, run `adb uninstall com.airidasbalkus.mino` first.
 
@@ -55,9 +55,22 @@ Earlier development builds (versionCodes 1–4) were sideloaded for testing only
 - ABI: arm64-v8a only
 - Tested: see docs/CA1/device-matrix.md (Galaxy S24 Ultra, Android 17: runs, current; XCover Pro, Android 13: runs; OPPO Find X5 Pro: ran until broken; x86_64 emulator: installs, does not run under ARM64 translation)
 
+- Internet access: not required. The game makes no network requests; "Give feedback" on the About screen opens the phone's browser.
+
+## Controls
+- Swipe left / right: change lane (3 lanes, portrait, one thumb).
+- Collect coins; tap Upgrade (in-run) to buy faster lane changes.
+- Pause button (top right) or Android Back: pause. Resume continues in place.
+- Home / app switch / notification shade: the game pauses itself and mutes audio.
+- Settings (pause menu): haptics, sound, text size, Balanced / High FPS, quality tier (Auto / Low / Mid / High, applies on next launch).
+- Back on the About panel closes it.
+
+## Known Issues
+See [KnownIssues.md](KnownIssues.md): KI-01 first chunk blocking the start lane, KI-02 nav bar over the score, KI-03 HUD pause button (all fixed in 0.9.1).
+
 ## AI assistance
 Claude (Anthropic) was used as a step-by-step guide through the lab sheets: explaining settings and error logs, which I reviewed and edited. All builds, installs and measurements were run by me on my own device.
 - Week 6: I asked Claude to organise `Assets/scripts` into folders (Core, Player, Spawning, UI, Feedback, Debug, Economy). It moved the existing files with their `.meta` files; no script code was changed.
 - Week 7 Lab B: Claude guided the thermal soak step by step, calculated the p99 values from my Profile Analyzer CSV exports and summarised my logcat files
 - Week 8 Lab A: Claude guided the release build, build stamp, drafted the QA docs from my build outputs, which I reviewed and edited.
-- Week 9 Lab A + showcase: Claude wrote the device tier code, the underwater art/audio wiring and the UI skin bake tool, and drafted the Week 9 docs. I reviewed the code, did the Editor setup, builds and device tests myself.
+- Week 9 Lab A + showcase: Claude wrote the device tier code, the underwater art/audio wiring and the UI skin bake tool, and drafted the Week 9 docs. I reviewed the code, did the Editor setup, builds and device tests myself, and drafted the Reflective Journal and one-page Performance Baseline from my own logs and measurements, which I checked and edited.
