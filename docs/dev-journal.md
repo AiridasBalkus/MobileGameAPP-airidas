@@ -175,3 +175,14 @@ Week 3 Lab B, Part D (Dev build, stress test, 60 s, frame 2733)
 - Polish: coin bob/spin, coin counter pop with "+5", red hit flash, "New best!" on Result, bigger Play/Retry/Resume, 48 dp touch targets.
 - Release logs: [Baseline], [Loader], [Wallet], [AP], [iap-stub], [Probe] now only in Editor/Development builds (Week 7: GC ~99 B/frame from Debug.Log spam). [telemetry], [perf], build= and [Pause] kept.
 - Next: Editor steps (Quality levels Low/Mid/High and URP assets, tier dropdown, Always Included particle shader), build 0.9.0 / versionCode 6, re-run the pause test x10 with the HUD button, measure Week 9 memory budget.
+
+11 to 16 Nov 2026: Week 9 Lab B (showcase) and Week 10 Lab A (store assets)
+- Feedback used: no peer-form export from the showcase was shared with me, so the strongest written feedback is the Pack 3 survey on 0.8.0 (2 testers, docs/CA3/qa/survey/responses-0.8.0.csv).
+- Top fixes and decisions:
+  1. "Run faster" (S25 FE tester; Control 1/5, One more go 1/5): done before CA2. Start speed 5 goes to 7.5 units/s, top speed reached sooner.
+  2. "What does upgrade do?" (same tester): done before CA2. The button now reads "Faster lane change Lv N, cost coins" and dims when unaffordable.
+  3. "Pause doesn't pause" (same tester): done before CA2 (KI-03). To verify the HUD pause x10 on device for CA3.
+- Second tester (Galaxy A15, low tier) rated everything 3-4 with no comment: mid-tier scores are the baseline to beat in Pack 3 (target 10+ testers by 29 Nov).
+- Targets for CA3 written in docs/CA3/targets.md (thermals p99 <= 19.5 ms at minute 10, all six scenarios on S24 + A15, store assets).
+- Store: new icon (diver with goggles, no text; the first version's wordmark was unreadable at 48 px), feature graphic 1024x500, 6 screenshots cropped from 1080x2340 to 1080x1920 (S24 is 19.5:9, over Play's 2:1 limit), short descriptions A/B, long description checked against 0.9.1.
+- Async Pack 2 deck: icon moodboard, screenshot plan, copy, competitor scan (Subway Surfers, Temple Run 2, Blue Swirl). Due Tue 17 Nov 10:00.
