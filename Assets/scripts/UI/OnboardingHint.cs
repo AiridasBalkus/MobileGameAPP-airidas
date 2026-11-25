@@ -23,6 +23,12 @@ public class OnboardingHint : MonoBehaviour
     bool _swiped;
     bool _counted;
 
+    // ResumeGuard state: progress lives in fields so a restart continues, never replays
+    CancellationTokenSource _cts;
+    bool _paused, _done;
+    int _phase;   // 0 swipe text, 1 coins text, 2 fade out
+    float _t;     // seconds spent in the current phase
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     static void Hook()
     {
@@ -90,13 +96,34 @@ public class OnboardingHint : MonoBehaviour
         _game = FindAnyObjectByType<GameManager>();
         if (_game) _game.StateChanged += OnStateChanged;
         LaneRunner.LaneChanged += OnLaneChanged;
-        _ = RunAsync(destroyCancellationToken);
+        LifecycleGuard.PausedChanged += OnPausedChanged;
+        _label.SetText(SwipeText);
+        _group.alpha = 1f;
+        RenewCts();
+        _ = RunAsync(_cts.Token);
     }
 
     void OnDestroy()
     {
         if (_game) _game.StateChanged -= OnStateChanged;
         LaneRunner.LaneChanged -= OnLaneChanged;
+        LifecycleGuard.PausedChanged -= OnPausedChanged;
+        if (_cts != null) { _cts.Cancel(); _cts.Dispose(); _cts = null; }
+    }
+
+    // One-shot: stop on pause, continue on resume only if it hasn't finished.
+    void OnPausedChanged(bool paused)
+    {
+        if (paused == _paused || _cts == null) return;
+        _paused = paused;
+        RenewCts();
+        if (!paused && !_done) _ = RunAsync(_cts.Token);
+    }
+
+    void RenewCts()
+    {
+        if (_cts != null) { _cts.Cancel(); _cts.Dispose(); }
+        _cts = CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken);
     }
 
     void OnLaneChanged(int direction) => _swiped = true;
@@ -114,23 +141,30 @@ public class OnboardingHint : MonoBehaviour
     {
         try
         {
-            _label.SetText(SwipeText);
-            _group.alpha = 1f;
-            for (float t = 0f; !_swiped && t < SwipeHintMax && !_counted; t += Time.deltaTime)
-                await Awaitable.NextFrameAsync(ct);
-
-            if (!_counted)
+            if (_phase == 0)
             {
-                _label.SetText(CoinsText);
-                for (float t = 0f; t < CoinsHintTime && !_counted; t += Time.deltaTime)
+                for (; !_swiped && _t < SwipeHintMax && !_counted; _t += Time.deltaTime)
                     await Awaitable.NextFrameAsync(ct);
+                _phase = 1; _t = 0f;
             }
 
-            for (float t = 0f; t < FadeTime && !_counted; t += Time.deltaTime)
+            if (_phase == 1)
             {
-                _group.alpha = 1f - t / FadeTime;
+                if (!_counted)
+                {
+                    _label.SetText(CoinsText);
+                    for (; _t < CoinsHintTime && !_counted; _t += Time.deltaTime)
+                        await Awaitable.NextFrameAsync(ct);
+                }
+                _phase = 2; _t = 0f;
+            }
+
+            for (; _t < FadeTime && !_counted; _t += Time.deltaTime)
+            {
+                _group.alpha = 1f - _t / FadeTime;
                 await Awaitable.NextFrameAsync(ct);
             }
+            _done = true;
             _group.alpha = 0f;
             gameObject.SetActive(false);
         }

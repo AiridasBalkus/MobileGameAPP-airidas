@@ -8,8 +8,11 @@ public class LifecycleGuard : MonoBehaviour
     // Home, app switch, incoming call, screen off: save HERE.
     void OnApplicationPause(bool paused)
     {
-        if (!paused) return;           // resuming is a player choice
-        PlayerPrefs.Save();            // swap for your save system
+        // Resuming is a player choice (Resume button). Wallet, score and run state are
+        // still in memory, so nothing is reloaded here.
+        if (!paused) return;
+        if (Wallet.Instance) WalletSave.Save(Wallet.Instance); // coins + level to disk
+        PlayerPrefs.Save();            // flush everything else (highscore, hint runs, settings)
         SetPaused(true);
     }
 
