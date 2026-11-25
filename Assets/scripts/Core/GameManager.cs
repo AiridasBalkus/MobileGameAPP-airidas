@@ -29,8 +29,19 @@ public class GameManager : MonoBehaviour
     public static bool LastRunNewBest { get; private set; }
     float _startZ;
 
+    // ResumeGuard state for the result delay
+    CancellationTokenSource _resultCts;
+    bool _paused;         // last value seen from LifecycleGuard
+    bool _resultPending;  // run ended, Result not loaded yet
+    bool _resultDone;     // Result load requested: never again
+    float _endTime;       // scaled Time.time at EndRun (freezes while timeScale is 0)
+
     void OnEnable() => LifecycleGuard.PausedChanged += OnPausedChanged;
-    void OnDisable() => LifecycleGuard.PausedChanged -= OnPausedChanged;
+    void OnDisable()
+    {
+        LifecycleGuard.PausedChanged -= OnPausedChanged;
+        if (_resultCts != null) { _resultCts.Cancel(); _resultCts.Dispose(); _resultCts = null; }
+    }
     void Start()
     {
         _startZ = runner.transform.position.z;
@@ -60,6 +71,13 @@ public class GameManager : MonoBehaviour
     public void Lose() => EndRun(State.Lost);
     void OnPausedChanged(bool paused)
     {
+        if (paused == _paused) return; // focus + pause both send true; launch sends false
+        _paused = paused;
+        if (_resultPending)
+        {
+            RenewResultCts();                                   // stops a waiting delay
+            if (!paused && !_resultDone) _ = GoToResultAsync(_resultCts.Token);
+        }
         if (Current == State.Won || Current == State.Lost) return;
         SetState(paused ? State.Paused : State.Playing);
     }
@@ -79,16 +97,30 @@ public class GameManager : MonoBehaviour
         LastScore = Score;
         LastRunNewBest = LastScore > HighScore;
         if (LastRunNewBest) { PlayerPrefs.SetInt("highscore", LastScore); PlayerPrefs.Save(); }
-        _ = GoToResultAsync(destroyCancellationToken);
+        _endTime = Time.time;
+        _resultPending = true;
+        RenewResultCts();
+        if (!_paused) _ = GoToResultAsync(_resultCts.Token); // else OnPausedChanged starts it
+    }
+    void RenewResultCts()
+    {
+        if (_resultCts != null) { _resultCts.Cancel(); _resultCts.Dispose(); }
+        _resultCts = CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken);
     }
     async Awaitable GoToResultAsync(CancellationToken ct)
     {
         try
         {
-            await Awaitable.WaitForSecondsAsync(resultDelay, ct);
+            // only the part of the delay not already waited (scaled time skips the pause)
+            float remaining = resultDelay - (Time.time - _endTime);
+            if (remaining > 0f) await Awaitable.WaitForSecondsAsync(remaining, ct);
+            if (_resultDone || _paused || ct.IsCancellationRequested) return;
+            _resultDone = true;
+            _resultPending = false;
             _ = SceneLoader.Instance.Load("Result", Application.exitCancellationToken);
         }
-        catch (OperationCanceledException) { DevLog.Log("Result scene load canceled."); }
+        catch (OperationCanceledException) { DevLog.Log("[Result] delay canceled (pause or exit)"); }
+        catch (Exception e) { Debug.LogException(e); }
     }
     void SetState(State s) { Current = s; StateChanged?.Invoke(s); }
 }

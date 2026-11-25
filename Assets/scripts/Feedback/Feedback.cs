@@ -38,13 +38,16 @@ public class Feedback : MonoBehaviour
         _ = ShakeAsync(destroyCancellationToken);
     }
 
+    // Cosmetic one-shot, 0.35 s total: runs on unscaled time so it always finishes, even if a
+    // pause lands mid-shake. With scaled time it froze at timeScale 0 and left the camera
+    // offset and the red flash on screen under the pause menu.
     async Awaitable ShakeAsync(CancellationToken ct)
     {
         try
         {
             float total = Mathf.Max(shakeDuration, FlashTime);
             if (_flash) _flash.enabled = true;
-            for (float t = 0f; t < total; t += Time.deltaTime)
+            for (float t = 0f; t < total; t += Time.unscaledDeltaTime)
             {
                 float fade = Mathf.Clamp01(1f - t / shakeDuration);
                 cameraTransform.localPosition = _camHome + (Vector3)(UnityEngine.Random.insideUnitCircle * shakeStrength * fade);

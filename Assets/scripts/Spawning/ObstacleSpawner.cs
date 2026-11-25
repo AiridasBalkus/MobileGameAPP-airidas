@@ -17,6 +17,7 @@ public class ObstacleSpawner : MonoBehaviour
 
     const int Single = 0, PickupLine = 1, Wall = 2, Zigzag = 3, Corridor = 4;
     CancellationTokenSource _cts;
+    bool _paused; // last value seen from LifecycleGuard
     float _nextChunkZ;
     bool _first; // first chunk keeps the middle lane clear (KI-01)
 
@@ -25,10 +26,31 @@ public class ObstacleSpawner : MonoBehaviour
     {
         _nextChunkZ = player.position.z + 20f; //empy space at the start
         _first = true;
-        _cts = CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken);
+        _paused = false;
+        LifecycleGuard.PausedChanged += OnPausedChanged;
+        RenewCts();
         _ = RunAsync(_cts.Token);
     }
-    void OnDisable() { _cts.Cancel(); _cts.Dispose(); }
+    void OnDisable()
+    {
+        LifecycleGuard.PausedChanged -= OnPausedChanged;
+        _cts.Cancel(); _cts.Dispose(); _cts = null;
+    }
+
+    // Loop: stop on pause, start exactly one fresh loop on resume.
+    // Spawn state (_nextChunkZ, _first) lives in fields, so nothing repeats.
+    void OnPausedChanged(bool paused)
+    {
+        if (paused == _paused || _cts == null) return;
+        _paused = paused;
+        RenewCts();
+        if (!paused) _ = RunAsync(_cts.Token);
+    }
+    void RenewCts()
+    {
+        if (_cts != null) { _cts.Cancel(); _cts.Dispose(); }
+        _cts = CancellationTokenSource.CreateLinkedTokenSource(Application.exitCancellationToken);
+    }
     async Awaitable RunAsync(CancellationToken ct)
     {
         try
